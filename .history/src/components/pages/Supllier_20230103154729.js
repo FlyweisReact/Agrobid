@@ -67,7 +67,6 @@ const Supllier = () => {
           `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/createbid/verifyByAdmin/${id}`
         );
         console.log(data)
-        setModalShow(false)
         toast.success("Status Changed");
         fetchData();
       } catch (err) {

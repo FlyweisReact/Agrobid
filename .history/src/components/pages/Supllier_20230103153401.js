@@ -7,7 +7,6 @@ import Modal from "react-bootstrap/Modal";
 import { AiFillEdit } from "react-icons/ai";
 import { Button, Container, Form } from "react-bootstrap";
 import axios from "axios";
-import { toast } from "react-toastify";
 
 const user = [
   {
@@ -41,40 +40,22 @@ const user = [
 const Supllier = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [edit, setEdit] = useState(false);
-  const [data, setData] = useState([]);
-  const [id, setId] = useState("");
+  const [data , setData] = useState([])
 
   const fetchData = async () => {
-    try {
-      const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/createbid/all"
-      );
-      setData(data);
-    } catch (err) {
-      console.log(err);
+    try{
+      const {data} = await axios.get('http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/createbid/all')
+      setData(data)
+    }catch(err){
+      console.log(err)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData()
+  },[])
 
   function MyVerticallyCenteredModal(props) {
-    const editStatus = async (e) => {
-      e.preventDefault();
-      try {
-        const data = await axios.put(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/createbid/verifyByAdmin/${id}`
-        );
-        console.log(data)
-        setModalShow(false)
-        toast.success("Status Changed");
-        fetchData();
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
     return (
       <Modal
         {...props}
@@ -83,14 +64,38 @@ const Supllier = () => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Change Status
-          </Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter">Send OTP</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Container style={{ color: "black" }}>
             <Form>
-              <Button onClick={editStatus}>Change Status</Button>
+              {edit ? (
+                <>
+                  <Form.Group>
+                    <Form.Label>OTP</Form.Label>
+                    <Form.Control
+                      type="tel"
+                      pattern="[0-9]{6}"
+                      placeholder="124563"
+                    />
+                  </Form.Group>
+                </>
+              ) : (
+                <>
+                  <select
+                    className="mySelect"
+                    style={{ border: "1px solid black" }}
+                  >
+                    <option>Select</option>
+                    <option>Success</option>
+                    <option>Decline</option>
+                    <option>processing</option>
+                  </select>
+                  <br />
+                </>
+              )}
+              <br />
+              <Button>Submit</Button>
             </Form>
           </Container>
         </Modal.Body>
@@ -130,17 +135,17 @@ const Supllier = () => {
         >
           <thead>
             <tr>
-              <th> User </th>
+              <th>Image</th>
+              <th> Name </th>
+              <th>trade Name</th>
+              <th>Email</th>
+              <th>Contact</th>
               <th>Location</th>
-              <th>Lot Id</th>
               <th>Crop</th>
-              <th>Grade</th>
-              <th>Variety</th>
               <th>Quantity</th>
-              <th>Rate</th>
-              <th>Total Boga</th>
-              <th>Expected Rate</th>
+              <th>Total Amount</th>
               <th>Status</th>
+              <th>Send OTP</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -151,15 +156,12 @@ const Supllier = () => {
                 <td> {i.location} </td>
                 <td> {i.lotId} </td>
                 <td> {i.crop} </td>
-                <td> {i.grade} </td>
-                <td> {i.variety} </td>
-                <td> {i.quantity} </td>
-                <td> {i.rate} </td>
-                <td> {i.totalBags} </td>
-                <td> {i.expectedRate} </td>
-                <td> {i.status === true ? <p>True</p> : <p>False</p>} </td>
-
-                {/* <td>
+                <td> {i.location} </td>
+                <td>Cariander</td>
+                <td>5 Ton </td>
+                <td>₹5000</td>
+                <td>Ongoing</td>
+                <td>
                   <Button
                     style={{ borderRadius: "0", textAlign: "center" }}
                     onClick={() => {
@@ -169,13 +171,13 @@ const Supllier = () => {
                   >
                     Send
                   </Button>
-                </td> */}
+                </td>
                 <td>
                   <AiFillEdit
                     color="blue"
                     cursor={"pointer"}
                     onClick={() => {
-                      setId(i._id);
+                      setEdit(false);
                       setModalShow(true);
                     }}
                   />

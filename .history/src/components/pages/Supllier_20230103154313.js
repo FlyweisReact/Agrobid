@@ -66,8 +66,6 @@ const Supllier = () => {
         const data = await axios.put(
           `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/createbid/verifyByAdmin/${id}`
         );
-        console.log(data)
-        setModalShow(false)
         toast.success("Status Changed");
         fetchData();
       } catch (err) {
@@ -157,7 +155,7 @@ const Supllier = () => {
                 <td> {i.rate} </td>
                 <td> {i.totalBags} </td>
                 <td> {i.expectedRate} </td>
-                <td> {i.status === true ? <p>True</p> : <p>False</p>} </td>
+                <td> {i.status === "true" ? <p>True</p> : <p>False</p>} </td>
 
                 {/* <td>
                   <Button
@@ -175,7 +173,7 @@ const Supllier = () => {
                     color="blue"
                     cursor={"pointer"}
                     onClick={() => {
-                      setId(i._id);
+                      
                       setModalShow(true);
                     }}
                   />

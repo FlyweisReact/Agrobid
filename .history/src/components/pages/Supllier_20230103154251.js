@@ -41,39 +41,34 @@ const user = [
 const Supllier = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [edit, setEdit] = useState(false);
-  const [data, setData] = useState([]);
-  const [id, setId] = useState("");
+  const [data , setData] = useState([])
+  const [id, setId] = useState('')
 
   const fetchData = async () => {
-    try {
-      const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/createbid/all"
-      );
-      setData(data);
-    } catch (err) {
-      console.log(err);
+    try{
+      const {data} = await axios.get('http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/createbid/all')
+      setData(data)
+    }catch(err){
+      console.log(err)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData()
+  },[])
 
   function MyVerticallyCenteredModal(props) {
+
     const editStatus = async (e) => {
-      e.preventDefault();
-      try {
-        const data = await axios.put(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/createbid/verifyByAdmin/${id}`
-        );
-        console.log(data)
-        setModalShow(false)
-        toast.success("Status Changed");
-        fetchData();
-      } catch (err) {
-        console.log(err);
+      e.preventDefault()
+      try{
+        const data = await axios.put(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/createbid/verifyByAdmin/${id}`)
+        toast.success('Status Changed')
+        fetchData()
+      }catch(err){
+        console.log(err)
       }
-    };
+    }
 
     return (
       <Modal
@@ -83,14 +78,12 @@ const Supllier = () => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Change Status
-          </Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter">Change Status</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Container style={{ color: "black" }}>
             <Form>
-              <Button onClick={editStatus}>Change Status</Button>
+              <Button>Change Status</Button>
             </Form>
           </Container>
         </Modal.Body>
@@ -157,8 +150,8 @@ const Supllier = () => {
                 <td> {i.rate} </td>
                 <td> {i.totalBags} </td>
                 <td> {i.expectedRate} </td>
-                <td> {i.status === true ? <p>True</p> : <p>False</p>} </td>
-
+                <td> {i.status === 'true' ? <p>True</p> : <p>False</p>} </td>
+               
                 {/* <td>
                   <Button
                     style={{ borderRadius: "0", textAlign: "center" }}
@@ -175,7 +168,7 @@ const Supllier = () => {
                     color="blue"
                     cursor={"pointer"}
                     onClick={() => {
-                      setId(i._id);
+                      setEdit(false);
                       setModalShow(true);
                     }}
                   />
