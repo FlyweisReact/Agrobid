@@ -23,9 +23,8 @@ const Login = () => {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/admin/login" , {
-          
-        }
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/admin/login",
+        {}
       );
       navigate("/dashboard");
       toast.success("Welcome");

@@ -16,7 +16,7 @@ const Cat = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/banner/"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/banner/"
       );
       setData(data.data);
     } catch (e) {
@@ -51,17 +51,20 @@ const Cat = () => {
     };
 
     const postdata = async (e) => {
-      e.preventDefault()
-      try{
-        const { data } = await axios.post('http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/banner/' , {image :img})
-        console.log(data)
-        fetchData()
-        toast.success('Added')
-        props.onHide()
-      }catch(e){
-        console.log(e)
+      e.preventDefault();
+      try {
+        const { data } = await axios.post(
+          "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/banner/",
+          { image: img }
+        );
+        console.log(data);
+        fetchData();
+        toast.success("Added");
+        props.onHide();
+      } catch (e) {
+        console.log(e);
       }
-    } 
+    };
 
     return (
       <Modal

@@ -14,7 +14,7 @@ const News = () => {
   const fetchData = async (e) => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/post/"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/post/"
       );
       setData(data.data);
     } catch (E) {
@@ -82,7 +82,7 @@ const News = () => {
   const deleteHandler = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/mandi/delete/${id}`
+        `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/mandi/delete/${id}`
       );
       console.log(data);
       fetchData();

@@ -23,11 +23,13 @@ const Login = () => {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/admin/login" , {
-          email , password
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/admin/login",
+        {
+          email,
+          password,
         }
       );
-      localStorage.setItem('token' , data.message)
+      localStorage.setItem("token", data.message);
       navigate("/dashboard");
       toast.success("Welcome");
     } catch (err) {

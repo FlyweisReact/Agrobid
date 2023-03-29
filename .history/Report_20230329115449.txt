@@ -1,0 +1,10 @@
+Transporter Lead
+Invoice
+Transactions
+Notification (Crud)
+Comments , 
+Lot id => Inspiration 
+Crop => All Fields 
+ Transporter = > Loading => Transactions
+User => Crop
+

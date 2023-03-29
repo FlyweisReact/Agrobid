@@ -18,7 +18,7 @@ const Inspection = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/all"
       );
       setData(data.message);
     } catch (e) {
@@ -41,7 +41,7 @@ const Inspection = () => {
       e.preventDefault();
       try {
         const { data } = await axios.post(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/add`,
+          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/add`,
           { name, service, price, lotID, status }
         );
         console.log(data);
@@ -83,7 +83,7 @@ const Inspection = () => {
                 <Form.Group>
                   <Form.Label>Company Name</Form.Label>
                   <Form.Control
-                     type="text"
+                    type="text"
                     onChange={(e) => setName(e.target.value)}
                   />
                 </Form.Group>

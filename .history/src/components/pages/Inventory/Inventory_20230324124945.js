@@ -48,41 +48,39 @@ const crop = [
     image:
       "https://www.agrifarming.in/wp-content/uploads/2022/04/Boost-Rice-Yield2.jpg",
   },
-  
 ];
 
 const Inventory = () => {
   const [modalShow, setModalShow] = React.useState(false);
 
-  const [ data , setData ] = useState([])
+  const [data, setData] = useState([]);
 
   const fetchData = async () => {
-    try{
-      const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/crop")
-      setData(data.message)
-    }catch(e){
-      console.log(e)
+    try {
+      const { data } = await axios.get(
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/crop"
+      );
+      setData(data.message);
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchData()
-  },[])
+    fetchData();
+  }, []);
 
   function MyVerticallyCenteredModal(props) {
-
-    const [ crop , setCrop ] = useState("")
-    const [ userId , setUserId ] = useState("")
+    const [crop, setCrop] = useState("");
+    const [userId, setUserId] = useState("");
 
     const postData = async () => {
-      try{
-
-      }catch(e){
-        console.log(e)
+      try {
+      } catch (e) {
+        console.log(e);
       }
-    }
+    };
 
-    
     return (
       <Modal
         {...props}
@@ -186,13 +184,20 @@ const Inventory = () => {
           <tbody>
             {data?.map((i, index) => (
               <tr key={index}>
-              <td> {index + 1}  </td>
+                <td> {index + 1} </td>
                 <td>
-                  <img src='https://images.squarespace-cdn.com/content/v1/57d2a26b20099eb50e305b38/1658791857222-LQ0C620Z125PLV9GTBAB/savoy-cabbage-illustration.jpg?format=1000w' alt="" className="fast-food" />
+                  <img
+                    src="https://images.squarespace-cdn.com/content/v1/57d2a26b20099eb50e305b38/1658791857222-LQ0C620Z125PLV9GTBAB/savoy-cabbage-illustration.jpg?format=1000w"
+                    alt=""
+                    className="fast-food"
+                  />
                 </td>
-                <td> {i.crop?.map((item , index) => (
-                  <span key={index} > {item} , </span>
-                ))} </td>
+                <td>
+                  {" "}
+                  {i.crop?.map((item, index) => (
+                    <span key={index}> {item} , </span>
+                  ))}{" "}
+                </td>
                 <td>
                   <AiFillDelete
                     color="red"

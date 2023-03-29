@@ -18,7 +18,7 @@ const Inspection = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/all"
       );
       setData(data.message);
     } catch (e) {
@@ -41,7 +41,7 @@ const Inspection = () => {
       e.preventDefault();
       try {
         const { data } = await axios.post(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/add`,
+          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/add`,
           { name, service, price, lotID, status }
         );
         console.log(data);
@@ -92,11 +92,13 @@ const Inspection = () => {
                   style={{ border: "1px solid black", padding: "5px" }}
                   onChange={(e) => setService(e.target.value)}
                 >
-                  <option value='Type of Services' >Type of Services</option>
-                  <option value='Sample Draw Only' > Sample Draw Only</option>
-                  <option value='Inspection Sites'>Inspection Sites</option>
-                  <option value='Sample Draw + Physical Inspection'>Sample Draw + Physical Inspection</option>
-                  <option value='  Sample Draw + Physical Inspection + Chemical Inspection'>
+                  <option value="Type of Services">Type of Services</option>
+                  <option value="Sample Draw Only"> Sample Draw Only</option>
+                  <option value="Inspection Sites">Inspection Sites</option>
+                  <option value="Sample Draw + Physical Inspection">
+                    Sample Draw + Physical Inspection
+                  </option>
+                  <option value="  Sample Draw + Physical Inspection + Chemical Inspection">
                     Sample Draw + Physical Inspection + Chemical Inspection
                   </option>
                 </select>

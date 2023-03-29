@@ -16,7 +16,7 @@ const Inspection = () => {
 
   const fetchData = async () => {
     try { 
-      const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/all")
+      const { data } = await axios.get("https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/all")
       setData(data.message)
     }catch(e) { 
       console.log(e)

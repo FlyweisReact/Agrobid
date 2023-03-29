@@ -58,7 +58,7 @@ const Inventory = () => {
 
   const fetchData = async () => {
     try{
-      const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/crop")
+      const { data } = await axios.get("https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/crop")
       setData(data.message)
     }catch(e){
       console.log(e)

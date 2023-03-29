@@ -9,17 +9,18 @@ import axios from "axios";
 
 const Customers = () => {
   const navigate = useNavigate();
-  const [ data , setData ] = useState([])
+  const [data, setData] = useState([]);
 
   const fetchData = async () => {
-    try{
-      const { data } =await axios.get('http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/admin/users')
-      setData()
-    }catch(E) {
-      console.log(E)
+    try {
+      const { data } = await axios.get(
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/admin/users"
+      );
+      setData();
+    } catch (E) {
+      console.log(E);
     }
-  }
-
+  };
 
   return (
     <>

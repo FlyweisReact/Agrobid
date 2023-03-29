@@ -18,7 +18,7 @@ const Buyer = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/admin/buyer"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/admin/buyer"
       );
       setData(data);
       setDataCount(data.message.length);
@@ -41,7 +41,7 @@ const Buyer = () => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            {edit ?"Send OTP"  :  "Edit Status"}
+            {edit ? "Send OTP" : "Edit Status"}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -140,7 +140,7 @@ const Buyer = () => {
                 <td> {i.email} </td>
                 <td> {i.phoneNumber} </td>
                 <td> {i.address} </td>
-        
+
                 <td>
                   <Button
                     style={{ borderRadius: "0", textAlign: "center" }}

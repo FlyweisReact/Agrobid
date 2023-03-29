@@ -4,7 +4,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Table, Modal, Form } from "react-bootstrap";
 import HOC from "../layout/HOC";
-import {NotificationManager} from "react-notifications/lib/NotificationManager";
+import { NotificationManager } from "react-notifications/lib/NotificationManager";
 
 const MandiRates = () => {
   const [show, setShow] = useState(false);
@@ -14,11 +14,11 @@ const MandiRates = () => {
   const fetchData = async (e) => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/mandi/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/mandi/all"
       );
       setData(data);
       setDataCount(data.message.length);
-      NotificationManager.info('Info message');
+      NotificationManager.info("Info message");
     } catch (E) {
       console.log(E);
     }
@@ -39,11 +39,9 @@ const MandiRates = () => {
     const postData = async (e) => {
       try {
         const { data } = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/mandi/add",
+          "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/mandi/add",
           { product, location, date, arrival, minPrice, maxPrice }
         );
-
-
       } catch (e) {
         console.log(e);
       }

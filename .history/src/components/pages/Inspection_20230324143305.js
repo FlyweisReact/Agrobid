@@ -18,7 +18,7 @@ const Inspection = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/all"
       );
       setData(data.message);
     } catch (e) {
@@ -31,24 +31,27 @@ const Inspection = () => {
   }, []);
 
   function MyVerticallyCenteredModal(props) {
-    const [name , setName] = useState("")
-    const [service , setService] = useState("")
-    const [price, setPrice] = useState("")
-    const [lotID , setLotID] = useState("")
-    const [status , setStatus] = useState("")
+    const [name, setName] = useState("");
+    const [service, setService] = useState("");
+    const [price, setPrice] = useState("");
+    const [lotID, setLotID] = useState("");
+    const [status, setStatus] = useState("");
 
     const postHandler = async (e) => {
-      e.preventDefault()
-      try{
-        const { data } = await axios.post(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/add` , { name , service , price , lotID , status })
-        console.log(data)
-        toast.success('Added')
-        fetchData()
-        props.onHide()
-      }catch(e) { 
-        console.log(e)
+      e.preventDefault();
+      try {
+        const { data } = await axios.post(
+          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/add`,
+          { name, service, price, lotID, status }
+        );
+        console.log(data);
+        toast.success("Added");
+        fetchData();
+        props.onHide();
+      } catch (e) {
+        console.log(e);
       }
-    }
+    };
 
     return (
       <Modal
@@ -79,8 +82,7 @@ const Inspection = () => {
               <Form onSubmit={postHandler}>
                 <Form.Group>
                   <Form.Label>Company Name</Form.Label>
-                  <Form.Control type="text" onChange={(e) =>setName(e.tra
-                  )} />
+                  <Form.Control type="text" onChange={(e) => setName(e.tra)} />
                 </Form.Group>
                 <br />
                 <select style={{ border: "1px solid black", padding: "5px" }}>
@@ -143,51 +145,50 @@ const Inspection = () => {
         </div>
       </section>
 
-    
-        <Table
-          striped
-          bordered
-          hover
-          style={{
-            overflow: "scroll",
-            width: "100%",
-          }}
-        >
-          <thead>
+      <Table
+        striped
+        bordered
+        hover
+        style={{
+          overflow: "scroll",
+          width: "100%",
+        }}
+      >
+        <thead>
+          <tr>
+            <th>SNo.</th>
+            <th>Comapny Name</th>
+            <th>Type of Service</th>
+            <th>Prices</th>
+            <th>Asigned Lot ID</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data?.map((i, index) => (
             <tr>
-              <th>SNo.</th>
-              <th>Comapny Name</th>
-              <th>Type of Service</th>
-              <th>Prices</th>
-              <th>Asigned Lot ID</th>
-              <th>Status</th>
-              <th>Action</th>
+              <td> {index + 1} </td>
+              <td> {i.name} </td>
+              <td> {i.service} </td>
+              <td> ₹{i.price} </td>
+              <td> {i.lotID} </td>
+              <td> {i.status} </td>
+              <td style={{ display: "flex", gap: "10px" }}>
+                <AiFillDelete color="red" cursor={"pointer"} />
+                <AiFillEdit
+                  color="blue"
+                  cursor={"pointer"}
+                  onClick={() => {
+                    setEdit(true);
+                    setModalShow(true);
+                  }}
+                />
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {data?.map((i, index) => (
-              <tr>
-                <td> {index + 1} </td>
-                <td> {i.name} </td>
-                <td> {i.service} </td>
-                <td> ₹{i.price} </td>
-                <td> {i.lotID} </td>
-                <td> {i.status} </td>
-                <td style={{ display: "flex", gap: "10px" }}>
-                  <AiFillDelete color="red" cursor={"pointer"} />
-                  <AiFillEdit
-                    color="blue"
-                    cursor={"pointer"}
-                    onClick={() => {
-                      setEdit(true);
-                      setModalShow(true);
-                    }}
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+          ))}
+        </tbody>
+      </Table>
     </>
   );
 };

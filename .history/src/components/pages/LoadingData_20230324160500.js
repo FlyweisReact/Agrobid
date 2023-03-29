@@ -15,7 +15,7 @@ const LoadingData = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/loding/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/loding/all"
       );
       setData(data.data);
     } catch (e) {
@@ -49,7 +49,7 @@ const LoadingData = () => {
                 </Form.Select>
               </Form.Group>
               <Form.Group className="mb-3">
-              <Form.Select aria-label="Default select example">
+                <Form.Select aria-label="Default select example">
                   <option>-- Select Supplier --</option>
                 </Form.Select>
               </Form.Group>

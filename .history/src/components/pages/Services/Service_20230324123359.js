@@ -18,7 +18,7 @@ const Service = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/transport"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/transport"
       );
       setData(data.data);
     } catch (e) {
@@ -41,10 +41,10 @@ const Service = () => {
     const [vehicleRoutes, setVR] = useState("");
 
     const postData = async (e) => {
-      e.preventDefault()
+      e.preventDefault();
       try {
         const { data } = await axios.post(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/transport/${transporterId}`,
+          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/transport/${transporterId}`,
           {
             vehicleNumber,
             currentLocation,
@@ -62,12 +62,11 @@ const Service = () => {
       }
     };
 
-
-    const putHandler =  async (e) => {
-      e.preventDefault()
+    const putHandler = async (e) => {
+      e.preventDefault();
       try {
         const { data } = await axios.put(
-         `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/transport/63aae201cad1be91f6c10158`,
+          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/transport/63aae201cad1be91f6c10158`,
           {
             vehicleNumber,
             currentLocation,
@@ -88,7 +87,7 @@ const Service = () => {
     const fetchTransporter = async () => {
       try {
         const { data } = await axios.get(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/admin/transpoter"
+          "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/admin/transpoter"
         );
         setTransporterData(data.message);
       } catch (e) {
@@ -183,7 +182,7 @@ const Service = () => {
   const deleteHandler = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/transport/${id}`
+        `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/transport/${id}`
       );
       toast.success(data.msg);
       fetchData();

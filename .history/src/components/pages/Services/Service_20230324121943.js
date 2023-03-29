@@ -10,40 +10,36 @@ import { toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 
-
-
 const Service = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [edit, setEdit] = useState(false);
-  const [ data , setData ] = useState([])
+  const [data, setData] = useState([]);
 
-  // Get Vehicle 
-  const  fetchData  = async () => {
-    try{
-      const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/transport")
-      setData(data.data)
-    }catch(e){
-      console.log(e)
+  // Get Vehicle
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get(
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/transport"
+      );
+      setData(data.data);
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchData()
-  },[])
+    fetchData();
+  }, []);
 
   // Edit/Add Modal
   function MyVerticallyCenteredModal(props) {
+    const [vehicleNumber, setVN] = useState("");
+    const [currentLocation, setCL] = useState("");
+    const [attachFleet, setAF] = useState("");
+    const [] = useState("");
+    const [] = useState("");
 
-    const [  vehicleNumber , setVN ] = useState("")
-    const [ currentLocation , setCL ] = useState("")
-    const [ attachFleet , setAF ] = useState("")
-    const [ ] = useState("")
-    const [ ] = useState("")
-
-    const postData = async () => {
-
-    }
-
+    const postData = async () => {};
 
     return (
       <Modal
@@ -63,7 +59,6 @@ const Service = () => {
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Vehicle Number</Form.Label>
                 <Form.Control type="number" min={1} />
-
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -82,10 +77,8 @@ const Service = () => {
                 <Form.Label>Vehicle Route </Form.Label>
                 <Form.Control type="text" />
               </Form.Group>
-      
-              <Button variant="outline-success" >
-                Submit
-              </Button>
+
+              <Button variant="outline-success">Submit</Button>
             </Form>
           </Container>
         </Modal.Body>
@@ -94,16 +87,17 @@ const Service = () => {
     );
   }
 
-
   const deleteHandler = async (id) => {
-    try{
-      const { data } = await axios.delete(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/transport/${id}`)
-      toast.success(data.msg)
-      fetchData()
-    }catch(e) { 
-      console.log(e)
+    try {
+      const { data } = await axios.delete(
+        `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/transport/${id}`
+      );
+      toast.success(data.msg);
+      fetchData();
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   return (
     <>
@@ -175,7 +169,11 @@ const Service = () => {
                       setModalShow(true);
                     }}
                   />
-                  <i className="fa-solid fa-trash" style={{color : 'red' , cursor : 'pointer'}} onClick={() => deleteHandler(i._id)} ></i>
+                  <i
+                    className="fa-solid fa-trash"
+                    style={{ color: "red", cursor: "pointer" }}
+                    onClick={() => deleteHandler(i._id)}
+                  ></i>
                 </div>
               </td>
             </tr>

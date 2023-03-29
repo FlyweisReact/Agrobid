@@ -19,7 +19,7 @@ const Service = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/transport"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/transport"
       );
       setData(data.data);
     } catch (e) {
@@ -43,7 +43,7 @@ const Service = () => {
     const postData = async () => {
       try {
         const { data } = await axios.post(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/transport/${setTID}`,
+          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/transport/${setTID}`,
           {
             vehicleNumber,
             currentLocation,
@@ -106,7 +106,7 @@ const Service = () => {
   const deleteHandler = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/transport/${id}`
+        `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/transport/${id}`
       );
       toast.success(data.msg);
       fetchData();

@@ -18,7 +18,7 @@ const Inspection = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/all"
       );
       setData(data.message);
     } catch (e) {
@@ -41,7 +41,7 @@ const Inspection = () => {
       e.preventDefault();
       try {
         const { data } = await axios.post(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/add`,
+          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/add`,
           { name, service, price, lotID, status }
         );
         console.log(data);
@@ -56,7 +56,7 @@ const Inspection = () => {
       e.preventDefault();
       try {
         const { data } = await axios.post(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/update/${id}`,
+          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/update/${id}`,
           {  status }
         );
         console.log(data);
@@ -156,7 +156,7 @@ const Inspection = () => {
 
   const deleteHandler = async (id) => {
     try{
-      const { data } = await axios.delete(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/delete/${id}`)
+      const { data } = await axios.delete(`https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/delete/${id}`)
       console.log(data)
       toast.success('Deleted')
       fetchData()

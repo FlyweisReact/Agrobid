@@ -13,7 +13,7 @@ const MandiRates = () => {
   const fetchData = async (e) => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/mandi/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/mandi/all"
       );
       setData(data);
       setDataCount(data.message.length);
@@ -38,13 +38,12 @@ const MandiRates = () => {
       e.preventDefault();
       try {
         const { data } = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/mandi/add",
+          "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/mandi/add",
           { product, location, date, arrival, minPrice, maxPrice }
         );
         console.log(data);
         fetchData();
         props.onHide();
-      
       } catch (e) {
         console.log(e);
       }

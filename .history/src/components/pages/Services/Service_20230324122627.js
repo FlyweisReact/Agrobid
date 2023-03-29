@@ -19,7 +19,7 @@ const Service = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/transport"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/transport"
       );
       setData(data.data);
     } catch (e) {
@@ -43,7 +43,7 @@ const Service = () => {
     const postData = async () => {
       try {
         const { data } = await axios.post(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/transport/${transporterId}`,
+          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/transport/${transporterId}`,
           {
             vehicleNumber,
             currentLocation,
@@ -99,7 +99,7 @@ const Service = () => {
                   onChange={(e) => setAF(e.target.value)}
                 />
               </Form.Group>
-              
+
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Capacity </Form.Label>
                 <Form.Control
@@ -115,8 +115,9 @@ const Service = () => {
                 />
               </Form.Group>
 
-
-              <Button variant="outline-success" type="submit" >Submit</Button>
+              <Button variant="outline-success" type="submit">
+                Submit
+              </Button>
             </Form>
           </Container>
         </Modal.Body>
@@ -128,7 +129,7 @@ const Service = () => {
   const deleteHandler = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/transport/${id}`
+        `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/transport/${id}`
       );
       toast.success(data.msg);
       fetchData();

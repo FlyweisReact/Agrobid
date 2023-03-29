@@ -14,7 +14,7 @@ const Customers = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/admin/users"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/admin/users"
       );
       setData(data);
     } catch (E) {
@@ -22,10 +22,9 @@ const Customers = () => {
     }
   };
 
-
   useEffect(() => {
-    fetchData()
-  },[])
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -41,10 +40,10 @@ const Customers = () => {
         <Table striped bordered hover>
           <thead>
             <tr>
-            <td>SNo.</td>
+              <td>SNo.</td>
               <th>Image</th>
               <th> Name </th>
-              <th>  </th>
+              <th> </th>
               <th>Trade Name</th>
               <th>Location</th>
               <th>Role</th>
@@ -54,7 +53,7 @@ const Customers = () => {
           <tbody>
             {data?.users?.map((i, index) => (
               <tr key={index}>
-              <td> {index} </td>
+                <td> {index} </td>
                 <td>
                   <img src={i.photo} alt="" className="fast-food" />
                 </td>

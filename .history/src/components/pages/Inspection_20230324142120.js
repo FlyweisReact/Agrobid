@@ -12,22 +12,22 @@ const Inspection = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [edit, setEdit] = useState(false);
 
-  const [ data, setData ] = useState([])
+  const [data, setData] = useState([]);
 
   const fetchData = async () => {
-    try { 
-      const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/all")
-      setData(data.message)
-    }catch(e) { 
-      console.log(e)
+    try {
+      const { data } = await axios.get(
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/all"
+      );
+      setData(data.message);
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchData()
-  },[])
-
-
+    fetchData();
+  }, []);
 
   function MyVerticallyCenteredModal(props) {
     return (
@@ -132,13 +132,13 @@ const Inspection = () => {
           bordered
           hover
           style={{
-            overflow : 'scroll',
-            width : '100%'
+            overflow: "scroll",
+            width: "100%",
           }}
         >
           <thead>
             <tr>
-            <th>SNo.</th>
+              <th>SNo.</th>
               <th>Comapny Name</th>
               <th>Type of Service</th>
               <th>Prices</th>
@@ -148,24 +148,27 @@ const Inspection = () => {
             </tr>
           </thead>
           <tbody>
-          {data?.map(( i ,index) => (
-            <tr>
-            <td> {index + 1} </td>
-              <td>  {i.name}  </td>
-              <td>  {i.service}  </td>
-              <td>  ₹{i.price}  </td>
-              <td>  {i.lotID}  </td>
-              <td>  {i.status}  </td>
-              <td style={{ display: "flex", gap: "10px" }}>
-                <AiFillDelete color="red" cursor={"pointer"} />
-                <AiFillEdit color="blue" cursor={"pointer"}  onClick={() => {
-              setEdit(true);
-              setModalShow(true);
-            }} />
-              </td>
-            </tr>
-          ))}
-          
+            {data?.map((i, index) => (
+              <tr>
+                <td> {index + 1} </td>
+                <td> {i.name} </td>
+                <td> {i.service} </td>
+                <td> ₹{i.price} </td>
+                <td> {i.lotID} </td>
+                <td> {i.status} </td>
+                <td style={{ display: "flex", gap: "10px" }}>
+                  <AiFillDelete color="red" cursor={"pointer"} />
+                  <AiFillEdit
+                    color="blue"
+                    cursor={"pointer"}
+                    onClick={() => {
+                      setEdit(true);
+                      setModalShow(true);
+                    }}
+                  />
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </div>

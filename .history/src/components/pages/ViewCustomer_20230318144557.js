@@ -9,46 +9,39 @@ const ViewCustomer = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  
-
 
   // Fetch Data
   const fetchHandler = async () => {
     try {
       const { data } = await axios.get(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/kyc/user/63d424f7291761a511615a06`
+        `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/kyc/user/63d424f7291761a511615a06`
       );
-      setData(data)
+      setData(data);
     } catch (e) {
       console.log(e);
     }
   };
 
-
   useEffect(() => {
-    fetchHandler()
-  },[])
+    fetchHandler();
+  }, []);
 
-  console.log(data?.bank?.[1]?.userId?.name)
- let UserRole =  data?.bank?.[1]?.userId?.role
- console.log(UserRole)
+  console.log(data?.bank?.[1]?.userId?.name);
+  let UserRole = data?.bank?.[1]?.userId?.role;
+  console.log(UserRole);
 
   return (
     <>
       <div>
-        <p style={{ color: "black", fontSize: "1.5rem" }}>View  </p>
+        <p style={{ color: "black", fontSize: "1.5rem" }}>View </p>
       </div>
-
-   
     </>
   );
 };
 
 export default HOC(ViewCustomer);
 
-
-
-   /*     {role === "Supplier" ? (
+/*     {role === "Supplier" ? (
         <div>
           <div className="sup">
             <div className="left">

@@ -48,26 +48,27 @@ const crop = [
     image:
       "https://www.agrifarming.in/wp-content/uploads/2022/04/Boost-Rice-Yield2.jpg",
   },
-  
 ];
 
 const Inventory = () => {
   const [modalShow, setModalShow] = React.useState(false);
 
-  const [ data , setData ] = useState([])
+  const [data, setData] = useState([]);
 
   const fetchData = async () => {
-    try{
-      const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/crop")
-      setData(data.message)
-    }catch(e){
-      console.log(e)
+    try {
+      const { data } = await axios.get(
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/crop"
+      );
+      setData(data.message);
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchData()
-  },[])
+    fetchData();
+  }, []);
 
   function MyVerticallyCenteredModal(props) {
     return (
@@ -179,7 +180,7 @@ const Inventory = () => {
           <tbody>
             {data?.map((i, index) => (
               <tr key={index}>
-              <td> {index + 1}  </td>
+                <td> {index + 1} </td>
                 <td>
                   <img src={i.image} alt="" className="fast-food" />
                 </td>

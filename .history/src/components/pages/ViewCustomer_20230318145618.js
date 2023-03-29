@@ -14,7 +14,7 @@ const ViewCustomer = () => {
   const fetchHandler = async () => {
     try {
       const { data } = await axios.get(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/kyc/user/63d424f7291761a511615a06`
+        `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/kyc/user/63d424f7291761a511615a06`
       );
       setData(data);
     } catch (e) {
@@ -41,7 +41,11 @@ const ViewCustomer = () => {
         <div className="sup">
           <div className="left">
             <img
-              src={data?.bank?.[1]?.userId?.photo ? data?.bank?.[1]?.userId?.photo : '' }
+              src={
+                data?.bank?.[1]?.userId?.photo
+                  ? data?.bank?.[1]?.userId?.photo
+                  : ""
+              }
               alt="user"
               style={{ width: "400px" }}
             />

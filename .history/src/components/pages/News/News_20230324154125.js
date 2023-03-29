@@ -12,7 +12,7 @@ const News = () => {
   const fetchData = async (e) => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/auth/news/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/auth/news/all"
       );
       setData(data.message);
     } catch (E) {
@@ -68,7 +68,7 @@ const News = () => {
   const deleteHandler = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/mandi/delete/${id}`
+        `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/mandi/delete/${id}`
       );
       console.log(data);
       fetchData();
@@ -111,14 +111,21 @@ const News = () => {
             {data?.map((i, index) => (
               <tr key={index}>
                 <td> {index + 1} </td>
-                <td> <img src={i.photo} alt={i.name} style={{width : '100px'}} /> </td>
+                <td>
+                  {" "}
+                  <img
+                    src={i.photo}
+                    alt={i.name}
+                    style={{ width: "100px" }}
+                  />{" "}
+                </td>
                 <td> {i.name} </td>
                 <td> {i.message} </td>
                 <td>
-                <a href={i.link}>
-                  <Button>Go</Button>
-                </a>
-                 </td>
+                  <a href={i.link}>
+                    <Button>Go</Button>
+                  </a>
+                </td>
                 <td>
                   <div className="d-flex gap-2">
                     <i

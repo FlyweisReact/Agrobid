@@ -13,12 +13,12 @@ const Inspection = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [edit, setEdit] = useState(false);
   const [data, setData] = useState([]);
-  const [ id ,  setId ] = useState("")
+  const [id, setId] = useState("");
 
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/all"
       );
       setData(data.message);
     } catch (e) {
@@ -41,7 +41,7 @@ const Inspection = () => {
       e.preventDefault();
       try {
         const { data } = await axios.post(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/add`,
+          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/add`,
           { name, service, price, lotID, status }
         );
         console.log(data);
@@ -56,8 +56,8 @@ const Inspection = () => {
       e.preventDefault();
       try {
         const { data } = await axios.post(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/update/${id}`,
-          {  status }
+          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/update/${id}`,
+          { status }
         );
         console.log(data);
         toast.success("Edited");
@@ -77,21 +77,22 @@ const Inspection = () => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-           {edit ? "Edit Inspection Company" : " Add Inspection Company"}
+            {edit ? "Edit Inspection Company" : " Add Inspection Company"}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Container style={{ color: "black" }}>
             {edit ? (
-              <Form onSubmit={putHandler} >
+              <Form onSubmit={putHandler}>
                 <Form.Group className="mb-3">
                   <Form.Label>Status</Form.Label>
-                  <Form.Control type="text"  onChange={(e) => setStatus(e.target.value)} />
+                  <Form.Control
+                    type="text"
+                    onChange={(e) => setStatus(e.target.value)}
+                  />
                 </Form.Group>
 
-                <Button type="submit">
-                  Submit
-                </Button>
+                <Button type="submit">Submit</Button>
               </Form>
             ) : (
               <Form onSubmit={postHandler}>
@@ -103,22 +104,22 @@ const Inspection = () => {
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                <select
-                  style={{ border: "1px solid black", padding: "5px" }}
-                  onChange={(e) => setService(e.target.value)}
-                >
-                  <option value='Type of Services' >Type of Services</option>
-                  <option value='Sample Draw Only' > Sample Draw Only</option>
-                  <option value='Inspection Sites'>Inspection Sites</option>
-                  <option value='Sample Draw + Physical Inspection'>Sample Draw + Physical Inspection</option>
-                  <option value='  Sample Draw + Physical Inspection + Chemical Inspection'>
-                    Sample Draw + Physical Inspection + Chemical Inspection
-                  </option>
-                </select>
-        
+                  <select
+                    style={{ border: "1px solid black", padding: "5px" }}
+                    onChange={(e) => setService(e.target.value)}
+                  >
+                    <option value="Type of Services">Type of Services</option>
+                    <option value="Sample Draw Only"> Sample Draw Only</option>
+                    <option value="Inspection Sites">Inspection Sites</option>
+                    <option value="Sample Draw + Physical Inspection">
+                      Sample Draw + Physical Inspection
+                    </option>
+                    <option value="  Sample Draw + Physical Inspection + Chemical Inspection">
+                      Sample Draw + Physical Inspection + Chemical Inspection
+                    </option>
+                  </select>
                 </Form.Group>
-           
-          
+
                 <Form.Group className="mb-3">
                   <Form.Label>Price</Form.Label>
                   <Form.Control
@@ -142,9 +143,7 @@ const Inspection = () => {
                   />
                 </Form.Group>
 
-                <Button type="submit">
-                  Submit
-                </Button>
+                <Button type="submit">Submit</Button>
               </Form>
             )}
           </Container>
@@ -155,16 +154,18 @@ const Inspection = () => {
   }
 
   const deleteHandler = async (id) => {
-    try{
-      const { data } = await axios.delete(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/delete/${id}`)
-      console.log(data)
-      toast.success('Deleted')
-      fetchData()
-    }catch(e) { 
-      console.log(e)
+    try {
+      const { data } = await axios.delete(
+        `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/delete/${id}`
+      );
+      console.log(data);
+      toast.success("Deleted");
+      fetchData();
+    } catch (e) {
+      console.log(e);
     }
-  }
- 
+  };
+
   return (
     <>
       <MyVerticallyCenteredModal
@@ -219,12 +220,16 @@ const Inspection = () => {
               <td> {i.lotID} </td>
               <td> {i.status} </td>
               <td style={{ display: "flex", gap: "10px" }}>
-                <AiFillDelete color="red" cursor={"pointer"} onClick={() => deleteHandler(i._id)} />
+                <AiFillDelete
+                  color="red"
+                  cursor={"pointer"}
+                  onClick={() => deleteHandler(i._id)}
+                />
                 <AiFillEdit
                   color="blue"
                   cursor={"pointer"}
                   onClick={() => {
-                    setId(i._id)
+                    setId(i._id);
                     setEdit(true);
                     setModalShow(true);
                   }}

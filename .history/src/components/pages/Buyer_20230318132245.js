@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import HOC from "../layout/HOC";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
-import {NotificationManager} from "react-notifications";
+import { NotificationManager } from "react-notifications";
 
 const Buyer = () => {
   const [data, setData] = useState([]);
@@ -13,11 +13,10 @@ const Buyer = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/admin/buyer"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/admin/buyer"
       );
       setData(data);
       setDataCount(data.message.length);
-    
     } catch (E) {
       console.log(E);
     }
@@ -25,7 +24,7 @@ const Buyer = () => {
 
   useEffect(() => {
     fetchData();
-    NotificationManager.success('Notification message', 'Title', 3000);
+    NotificationManager.success("Notification message", "Title", 3000);
   }, []);
 
   return (

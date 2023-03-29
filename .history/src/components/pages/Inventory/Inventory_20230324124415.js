@@ -48,21 +48,22 @@ const crop = [
     image:
       "https://www.agrifarming.in/wp-content/uploads/2022/04/Boost-Rice-Yield2.jpg",
   },
-  
 ];
 
 const Inventory = () => {
   const [modalShow, setModalShow] = React.useState(false);
 
-  const [ data , setData ] = useState([])
+  const [data, setData] = useState([]);
 
   const fetchData = async () => {
-    try{
-      const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/crop")
-    }catch(e){
-      console.log(e)
+    try {
+      const { data } = await axios.get(
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/crop"
+      );
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   function MyVerticallyCenteredModal(props) {
     return (

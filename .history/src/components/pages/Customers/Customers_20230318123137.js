@@ -14,7 +14,7 @@ const Customers = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/admin/users"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/admin/users"
       );
       setData(data);
     } catch (E) {

@@ -5,7 +5,7 @@ import HOC from "../../layout/HOC";
 import Table from "react-bootstrap/Table";
 import { Modal, Form, Button, FloatingLabel } from "react-bootstrap";
 import axios from "axios";
-import  {toast} from 'react-toastify'
+import { toast } from "react-toastify";
 
 const Terms = () => {
   const [modalShow, setModalShow] = React.useState(false);
@@ -14,7 +14,7 @@ const Terms = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/terms"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/terms"
       );
       setData(data.data[0]);
     } catch (e) {
@@ -23,19 +23,20 @@ const Terms = () => {
   };
 
   function MyVerticallyCenteredModal(props) {
+    const [terms, setTerms] = useState("");
 
-    const  [ terms , setTerms ] = useState("")
-
-    const putHandler =  async (e) => {
-      e.preventDefault()
-      try{
-        const { data} = await axios.put("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/terms/641023fa8f4752328fed8ec3" , {terms})
-        toast.success(data.msg)
-      }catch(e){
-        console.log(e)
+    const putHandler = async (e) => {
+      e.preventDefault();
+      try {
+        const { data } = await axios.put(
+          "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/terms/641023fa8f4752328fed8ec3",
+          { terms }
+        );
+        toast.success(data.msg);
+      } catch (e) {
+        console.log(e);
       }
-    } 
-
+    };
 
     return (
       <Modal
@@ -52,7 +53,10 @@ const Terms = () => {
         <Modal.Body>
           <Form onSubmit={putHandler}>
             <Form.Group className="mb-3">
-              <FloatingLabel controlId="floatingTextarea" label="Terms&Condition">
+              <FloatingLabel
+                controlId="floatingTextarea"
+                label="Terms&Condition"
+              >
                 <Form.Control
                   as="textarea"
                   onChange={(e) => setT}

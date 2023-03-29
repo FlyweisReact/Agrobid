@@ -12,15 +12,13 @@ const Terms = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/terms"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/terms"
       );
       setData(data.data);
     } catch (e) {
       console.log(e);
     }
   };
-
-
 
   useEffect(() => {
     fetchData();
@@ -43,9 +41,7 @@ const Terms = () => {
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
-            
-        </tbody>
+        <tbody></tbody>
       </Table>
     </>
   );

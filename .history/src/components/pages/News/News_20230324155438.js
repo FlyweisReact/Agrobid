@@ -13,7 +13,7 @@ const News = () => {
   const fetchData = async (e) => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/auth/news/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/auth/news/all"
       );
       setData(data.message);
     } catch (E) {
@@ -45,12 +45,11 @@ const News = () => {
         .then((res) => res.json())
         .then((data) => {
           setImg(data.url);
-          
+
           setLoading("done");
         })
         .catch((err) => {
           console.log(err);
-         
         });
     };
 
@@ -58,7 +57,7 @@ const News = () => {
       e.preventDefault();
       try {
         const { data } = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/auth/addNews/",
+          "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/auth/addNews/",
           { photo: img, message, link, name }
         );
         console.log(data);

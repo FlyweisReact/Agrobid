@@ -10,31 +10,30 @@ import axios from "axios";
 const Customers = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  const [ userCount , setUserCount ]  = useState('')
+  const [userCount, setUserCount] = useState("");
 
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/admin/users"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/admin/users"
       );
       setData(data);
-      setUserCount(data.users.length)
+      setUserCount(data.users.length);
     } catch (E) {
       console.log(E);
     }
   };
 
-
   useEffect(() => {
-    fetchData()
-  },[])
+    fetchData();
+  }, []);
 
   return (
     <>
       <section>
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">
           <span className="tracking-widest text-slate-900 font-semibold uppercase ">
-            All Users 
+            All Users
           </span>
         </div>
       </section>
@@ -43,7 +42,7 @@ const Customers = () => {
         <Table striped bordered hover>
           <thead>
             <tr>
-            <td>SNo.</td>
+              <td>SNo.</td>
               <th>Image</th>
               <th> Name </th>
               <th> Phone Number </th>
@@ -57,14 +56,14 @@ const Customers = () => {
           <tbody>
             {data?.users?.map((i, index) => (
               <tr key={index}>
-              <td> {index} </td>
+                <td> {index} </td>
                 <td>
                   <img src={i.photo} alt="" className="fast-food" />
                 </td>
                 <td> {i.name} </td>
                 <td> {i.phoneNumber} </td>
                 <td> {i.email} </td>
-                <td> {i.tradeName} </td>  
+                <td> {i.tradeName} </td>
                 <td> {i.address} </td>
                 <td> {i.role} </td>
 

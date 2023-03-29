@@ -18,7 +18,7 @@ const Inspection = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/all"
       );
       setData(data.message);
     } catch (e) {
@@ -41,7 +41,7 @@ const Inspection = () => {
       e.preventDefault();
       try {
         const { data } = await axios.post(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/add`,
+          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/add`,
           { name, service, price, lotID, status }
         );
         console.log(data);
@@ -88,7 +88,10 @@ const Inspection = () => {
                   />
                 </Form.Group>
                 <br />
-                <select style={{ border: "1px solid black", padding: "5px" }}    onChange={(e) => setName(e.target.value)}>
+                <select
+                  style={{ border: "1px solid black", padding: "5px" }}
+                  onChange={(e) => setName(e.target.value)}
+                >
                   <option>Type of Services</option>
                   <option>Sample Draw Only</option>
                   <option>Inspection Sites</option>
@@ -101,7 +104,11 @@ const Inspection = () => {
                 <br />
                 <Form.Group>
                   <Form.Label>Price</Form.Label>
-                  <Form.Control type="number" min={0}    onChange={(e) => setName(e.target.value)} />
+                  <Form.Control
+                    type="number"
+                    min={0}
+                    onChange={(e) => setName(e.target.value)}
+                  />
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Assign Lot Id</Form.Label>

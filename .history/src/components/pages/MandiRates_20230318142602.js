@@ -10,13 +10,13 @@ const MandiRates = () => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
   const [dataCount, setDataCount] = useState("");
-  const [ edit , setEdit ] = useState(false)
+  const [edit, setEdit] = useState(false);
 
   // Fetch Data
   const fetchData = async (e) => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/mandi/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/mandi/all"
       );
       setData(data);
       setDataCount(data.message.length);
@@ -28,7 +28,6 @@ const MandiRates = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
 
   // Add/Edit Data
   function AddRatesModal(props) {
@@ -44,7 +43,7 @@ const MandiRates = () => {
       e.preventDefault();
       try {
         const { data } = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/mandi/add",
+          "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/mandi/add",
           { product, location, date, arrival, minPrice, maxPrice }
         );
         console.log(data);
@@ -61,7 +60,7 @@ const MandiRates = () => {
       e.preventDefault();
       try {
         const { data } = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/mandi/add",
+          "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/mandi/add",
           { product, location, date, arrival, minPrice, maxPrice }
         );
         console.log(data);
@@ -71,8 +70,8 @@ const MandiRates = () => {
       } catch (e) {
         console.log(e);
       }
-    }
- 
+    };
+
     return (
       <Modal
         {...props}
@@ -144,7 +143,7 @@ const MandiRates = () => {
   const deleteHandler = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/mandi/delete/${id}`
+        `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/mandi/delete/${id}`
       );
       console.log(data);
       fetchData();

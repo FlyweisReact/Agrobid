@@ -55,20 +55,22 @@ const Detail = [
 ];
 
 const Discount = () => {
-  const [ data , setData ] = useState([])
+  const [data, setData] = useState([]);
 
   const fetchData = async () => {
-    try{
-      const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/kyc/all")
-      setData(data.data)
-    }catch(e) { 
-      console.log(e)
+    try {
+      const { data } = await axios.get(
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/kyc/all"
+      );
+      setData(data.data);
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchData()
-  },[])
+    fetchData();
+  }, []);
 
   // Serach Bar
   const [query, setQuery] = useState("");
@@ -102,7 +104,7 @@ const Discount = () => {
                 height: "40px",
                 fontSize: "18px",
               }}
-              placeholder='Search by Name , Phone Number....'
+              placeholder="Search by Name , Phone Number...."
               onChange={handlerChange}
             />
           </div>
@@ -137,7 +139,7 @@ const Discount = () => {
               <tr key={index}>
                 <td> {index + 1} </td>
                 <td> {i.user?.name} </td>
-                <td>  </td>
+                <td> </td>
                 <td>
                   {" "}
                   <img

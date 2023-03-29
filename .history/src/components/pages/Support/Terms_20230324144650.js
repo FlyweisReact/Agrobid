@@ -7,21 +7,18 @@ import { AiFillEdit } from "react-icons/ai";
 import axios from "axios";
 
 const Terms = () => {
+  // Api Integration --
 
-  
-// Api Integration --
-
-// Fetch Data Api
-const  fetchData = async () => {
-  try{
-    const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/terms")
-  }catch(e){  
-    console.log(e)
-  }
-}
-
-
-
+  // Fetch Data Api
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get(
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/terms"
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <>

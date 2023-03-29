@@ -16,7 +16,7 @@ const Cat = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/banner/"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/banner/"
       );
       setData(data.data);
     } catch (e) {
@@ -57,7 +57,7 @@ const Cat = () => {
       } else {
         try {
           const { data } = await axios.post(
-            "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/banner/",
+            "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/banner/",
             { image: img }
           );
           console.log(data);
@@ -108,13 +108,15 @@ const Cat = () => {
     );
   }
 
-  const DeleteHandler = async (id) =>{
-    try{
-      const { data} = await axios.delete(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/banner/64101de14129ebbc467363cb`)
-    }catch(e) { 
-      console.log(e)
+  const DeleteHandler = async (id) => {
+    try {
+      const { data } = await axios.delete(
+        `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/banner/64101de14129ebbc467363cb`
+      );
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   return (
     <>

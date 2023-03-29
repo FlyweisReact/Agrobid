@@ -9,31 +9,27 @@ const ViewCustomer = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  
-
 
   // Fetch Data
   const fetchHandler = async () => {
     try {
       const { data } = await axios.get(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/kyc/user/63d424f7291761a511615a06`
+        `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/kyc/user/63d424f7291761a511615a06`
       );
-      setData(data)
+      setData(data);
     } catch (e) {
       console.log(e);
     }
   };
 
-
   useEffect(() => {
-    fetchHandler()
-  },[])
+    fetchHandler();
+  }, []);
 
- let  UserName =  data?.bank?.[1]?.userId?.name
- let UserRole =  data?.bank?.[1]?.userId?.role
+  let UserName = data?.bank?.[1]?.userId?.name;
+  let UserRole = data?.bank?.[1]?.userId?.role;
 
- console.log(data)
-
+  console.log(data);
 
   return (
     <>
@@ -41,14 +37,13 @@ const ViewCustomer = () => {
         <p style={{ color: "black", fontSize: "1.5rem" }}>View {UserName} </p>
       </div>
 
-
       {UserRole === "Supplier" ? (
         <div>
           <div className="sup">
             <div className="left">
               <img
                 // src={ data?.bank?.[1]?.userId?.photo}
-                alt='user'
+                alt="user"
                 style={{ width: "400px" }}
               />
             </div>
@@ -84,16 +79,13 @@ const ViewCustomer = () => {
       ) : (
         ""
       )}
-   
     </>
   );
 };
 
 export default HOC(ViewCustomer);
 
-
-
-   /*   
+/*   
 
       {role === "Buyer" ? (
         <div>

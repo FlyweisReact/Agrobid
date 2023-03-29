@@ -13,7 +13,7 @@ const News = () => {
   const fetchData = async (e) => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/auth/news/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/auth/news/all"
       );
       setData(data.message);
     } catch (E) {
@@ -56,7 +56,7 @@ const News = () => {
       e.preventDefault();
       try {
         const { data } = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/auth/addNews/",
+          "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/auth/addNews/",
           { photo: img, message, link, name }
         );
         console.log(data);
@@ -108,7 +108,10 @@ const News = () => {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Link</Form.Label>
-              <Form.Control type="text"  onChange={(e) => setMessage(e.target.value)} />
+              <Form.Control
+                type="text"
+                onChange={(e) => setMessage(e.target.value)}
+              />
             </Form.Group>
             <Button variant="outline-success" type="submit">
               Submit

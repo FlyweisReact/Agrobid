@@ -14,7 +14,7 @@ const MandiRates = () => {
   const fetchData = async (e) => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/mandi/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/mandi/all"
       );
       setData(data);
       setDataCount(data.message.length);
@@ -38,7 +38,7 @@ const MandiRates = () => {
     const postData = async (e) => {
       try {
         const { data } = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/mandi/add",
+          "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/mandi/add",
           { product, location, date, arrival, minPrice, maxPrice }
         );
         NotificationManager.success("Mandi Rates ", "Added");
@@ -72,15 +72,21 @@ const MandiRates = () => {
             </Form.Group>
             <Form.Group>
               <Form.Label>Location</Form.Label>
-              <Form.Control type="text"   onChange={(e) => setProduct(e.target.value)}/>
+              <Form.Control
+                type="text"
+                onChange={(e) => setProduct(e.target.value)}
+              />
             </Form.Group>
             <Form.Group>
               <Form.Label>Date</Form.Label>
-              <Form.Control type="date"   onChange={(e) => setProduct(e.target.value)}/>
+              <Form.Control
+                type="date"
+                onChange={(e) => setProduct(e.target.value)}
+              />
             </Form.Group>
             <Form.Group>
               <Form.Label>Arrival</Form.Label>
-              <Form.Control type="date"  />
+              <Form.Control type="date" />
             </Form.Group>
             <Form.Group>
               <Form.Label>Min. Price</Form.Label>

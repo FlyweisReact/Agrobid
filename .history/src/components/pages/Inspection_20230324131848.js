@@ -12,22 +12,22 @@ const Inspection = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [edit, setEdit] = useState(false);
 
-  const [ data, setData ] = useState([])
+  const [data, setData] = useState([]);
 
   const fetchData = async () => {
-    try { 
-      const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/inspaction/all")
-      setData(data.message)
-    }catch(e) { 
-      console.log(e)
+    try {
+      const { data } = await axios.get(
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/inspaction/all"
+      );
+      setData(data.message);
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchData()
-  },[])
-
-
+    fetchData();
+  }, []);
 
   function MyVerticallyCenteredModal(props) {
     return (
@@ -146,34 +146,37 @@ const Inspection = () => {
             </tr>
           </thead>
           <tbody>
-          {data?.map(( i ,index) => (
-            <tr>
-            <td> </td>
-              <td> Inspection 1 </td>
-              <td>
-                <select style={{ border: "1px solid black", padding: "5px" }}>
-                  <option>Type of Services</option>
-                  <option>Sample Draw Only</option>
-                  <option>Inspection Sites</option>
-                  <option>Sample Draw + Physical Inspection</option>
-                  <option>
-                    Sample Draw + Physical Inspection + Chemical Inspection
-                  </option>
-                </select>
-              </td>
-              <td> ₹5,000 </td>
-              <td> 2 </td>
-              <td> Complete </td>
-              <td style={{ display: "flex", gap: "10px" }}>
-                <AiFillDelete color="red" cursor={"pointer"} />
-                <AiFillEdit color="blue" cursor={"pointer"}  onClick={() => {
-              setEdit(true);
-              setModalShow(true);
-            }} />
-              </td>
-            </tr>
-          ))}
-          
+            {data?.map((i, index) => (
+              <tr>
+                <td> </td>
+                <td> Inspection 1 </td>
+                <td>
+                  <select style={{ border: "1px solid black", padding: "5px" }}>
+                    <option>Type of Services</option>
+                    <option>Sample Draw Only</option>
+                    <option>Inspection Sites</option>
+                    <option>Sample Draw + Physical Inspection</option>
+                    <option>
+                      Sample Draw + Physical Inspection + Chemical Inspection
+                    </option>
+                  </select>
+                </td>
+                <td> ₹5,000 </td>
+                <td> 2 </td>
+                <td> Complete </td>
+                <td style={{ display: "flex", gap: "10px" }}>
+                  <AiFillDelete color="red" cursor={"pointer"} />
+                  <AiFillEdit
+                    color="blue"
+                    cursor={"pointer"}
+                    onClick={() => {
+                      setEdit(true);
+                      setModalShow(true);
+                    }}
+                  />
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </div>

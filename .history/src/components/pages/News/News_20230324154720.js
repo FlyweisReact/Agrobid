@@ -12,7 +12,7 @@ const News = () => {
   const fetchData = async (e) => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/auth/news/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/auth/news/all"
       );
       setData(data.message);
     } catch (E) {
@@ -25,13 +25,13 @@ const News = () => {
   }, []);
 
   function AddRatesModal(props) {
-    const [ loading , setLoading ] = useState(false)
+    const [loading, setLoading] = useState(false);
     const [img, setImg] = useState("");
-    const [message   , setMessage ] = useState("")
-    const [ link , setLink] = useState("")
+    const [message, setMessage] = useState("");
+    const [link, setLink] = useState("");
 
     const postthumbImage = (url) => {
-      setLoading(true)
+      setLoading(true);
       const data = new FormData();
       data.append("file", url);
       data.append("upload_preset", "ml_default");
@@ -46,7 +46,7 @@ const News = () => {
         })
         .catch((err) => {
           console.log(err);
-          setLoading(false)
+          setLoading(false);
         });
     };
 
@@ -76,10 +76,10 @@ const News = () => {
               <Form.Label>Image</Form.Label>
               <Form.Control type="text" required />
             </Form.Group>
-            
+
             <Form.Group className="mb-3">
               <Form.Label>TItle</Form.Label>
-              <Form.Control type="text" required  />
+              <Form.Control type="text" required />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Description</Form.Label>
@@ -141,14 +141,21 @@ const News = () => {
             {data?.map((i, index) => (
               <tr key={index}>
                 <td> {index + 1} </td>
-                <td> <img src={i.photo} alt={i.name} style={{width : '100px'}} /> </td>
+                <td>
+                  {" "}
+                  <img
+                    src={i.photo}
+                    alt={i.name}
+                    style={{ width: "100px" }}
+                  />{" "}
+                </td>
                 <td> {i.name} </td>
                 <td> {i.message} </td>
                 <td>
-                <a href={i.link} target='_blank' rel="noreferrer">
-                  <Button>Go</Button>
-                </a>
-                 </td>
+                  <a href={i.link} target="_blank" rel="noreferrer">
+                    <Button>Go</Button>
+                  </a>
+                </td>
                 <td>
                   <div className="d-flex gap-2">
                     <i

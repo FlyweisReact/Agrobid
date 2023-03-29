@@ -13,7 +13,7 @@ const News = () => {
   const fetchData = async (e) => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/auth/news/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/auth/news/all"
       );
       setData(data.message);
     } catch (E) {
@@ -55,7 +55,7 @@ const News = () => {
     const postData = async (e) => {
       e.preventDefault();
       try {
-        const { data } = await axios.post("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/auth/addNews/" , {photo : img , message , link , name })
+        const { data } = await axios.post("https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/auth/addNews/" , {photo : img , message , link , name })
         console.log(data)
         fetchData();
         toast.success('Added')

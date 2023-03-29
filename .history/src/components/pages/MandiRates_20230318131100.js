@@ -8,24 +8,24 @@ import HOC from "../layout/HOC";
 
 const MandiRates = () => {
   const [show, setShow] = useState(false);
-  const [ data , setData ] = useState([])
-  const [ dataCount , setDataCount ] = useState('')
+  const [data, setData] = useState([]);
+  const [dataCount, setDataCount] = useState("");
 
   const fetchData = async (e) => {
-    try{
-      const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/mandi/all")
-      setData(data)
-      setDataCount(data.message.length)
-    }catch(E){
-      console.log(E)
+    try {
+      const { data } = await axios.get(
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/mandi/all"
+      );
+      setData(data);
+      setDataCount(data.message.length);
+    } catch (E) {
+      console.log(E);
     }
-  }
-
+  };
 
   useEffect(() => {
-    fetchData()
-  },[])
-
+    fetchData();
+  }, []);
 
   function AddRatesModal(props) {
     return (
@@ -77,7 +77,9 @@ const MandiRates = () => {
       <AddRatesModal show={show} onHide={() => setShow(false)} />
 
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <p style={{ color: "black", fontSize: "1.5rem" }}>Mandi Rates (Total  : {dataCount}) </p>
+        <p style={{ color: "black", fontSize: "1.5rem" }}>
+          Mandi Rates (Total : {dataCount}){" "}
+        </p>
         <Button variant="outline-success" onClick={() => setShow(true)}>
           Add New Rate
         </Button>
@@ -97,17 +99,15 @@ const MandiRates = () => {
             </tr>
           </thead>
           <tbody>
-          {data?.message?.map((i , index) => (
-            <tr key={index}>
-              <td>  </td>
-              <td> {i.product} </td>
-              <td> {i.product} </td>
-              <td> {i.product} </td>
-              <td> {i.product} </td>
-
-
-            </tr>
-          ))}
+            {data?.message?.map((i, index) => (
+              <tr key={index}>
+                <td> </td>
+                <td> {i.product} </td>
+                <td> {i.product} </td>
+                <td> {i.product} </td>
+                <td> {i.product} </td>
+              </tr>
+            ))}
             <tr>
               <td>Product1</td>
               <td>Delhi</td>

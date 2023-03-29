@@ -8,25 +8,25 @@ import { toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 
-
-
 const Cat = () => {
   const [modalShow, setModalShow] = React.useState(false);
 
-  const [ data , setData ] = useState([])
+  const [data, setData] = useState([]);
 
   const fetchData = async () => {
-    try{
-        const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/banner/")
-        setData(data.data)
-    }catch(e) { 
-      console.log(e)
+    try {
+      const { data } = await axios.get(
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/banner/"
+      );
+      setData(data.data);
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchData()
-  },[])
+    fetchData();
+  }, []);
 
   function MyVerticallyCenteredModal(props) {
     return (
@@ -38,7 +38,7 @@ const Cat = () => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-         Add Banner
+            Add Banner
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -95,7 +95,7 @@ const Cat = () => {
         className="main-card--container"
         style={{ color: "black", marginBottom: "10%" }}
       >
-        {data?.map((i , index) => {
+        {data?.map((i, index) => {
           return (
             <>
               <div className="card-container" key={index}>
@@ -106,15 +106,13 @@ const Cat = () => {
                       style={{ width: "100%", height: "200px" }}
                       alt=""
                     />
-                 
-                
-                      <Button
-                        variant="outline-danger"
-                        style={{width : '100%' , marginTop : '1%'}}
-                      >
-                        Delete
-                      </Button>
-              
+
+                    <Button
+                      variant="outline-danger"
+                      style={{ width: "100%", marginTop: "1%" }}
+                    >
+                      Delete
+                    </Button>
                   </div>
                 </div>
               </div>

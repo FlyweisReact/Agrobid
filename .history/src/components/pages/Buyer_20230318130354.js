@@ -17,7 +17,7 @@ const Buyer = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/admin/buyer"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/admin/buyer"
       );
       setData(data);
       setDataCount(data.message.length);
@@ -29,8 +29,6 @@ const Buyer = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
-
 
   return (
     <>
@@ -85,8 +83,7 @@ const Buyer = () => {
                 <td> {i.email} </td>
                 <td> {i.phoneNumber} </td>
                 <td> {i.address} </td>
-                <td>
-                </td>
+                <td></td>
               </tr>
             ))}
           </tbody>

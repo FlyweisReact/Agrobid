@@ -16,7 +16,7 @@ const Cat = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/banner/"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/banner/"
       );
       setData(data.data);
     } catch (e) {
@@ -72,7 +72,7 @@ const Cat = () => {
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Image</Form.Label>
               <Form.Control type="file" postthumbImage />
-              <Form.Control type="file" onClick={(e) => postthumbImage(e.t) } />
+              <Form.Control type="file" onClick={(e) => postthumbImage(e.t)} />
             </Form.Group>
 
             <Button variant="outline-success" type="submit">

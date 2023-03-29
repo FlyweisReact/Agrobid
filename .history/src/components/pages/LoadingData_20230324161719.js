@@ -15,7 +15,7 @@ const LoadingData = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/loding/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/loding/all"
       );
       setData(data.data);
     } catch (e) {
@@ -34,7 +34,7 @@ const LoadingData = () => {
     const fetchUsers = async () => {
       try {
         const { data } = await axios.get(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/admin/users"
+          "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/admin/users"
         );
         setUsers(data.users);
       } catch (e) {
@@ -45,7 +45,7 @@ const LoadingData = () => {
     const fetchSupplier = async () => {
       try {
         const { data } = await axios.get(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/admin/supplier"
+          "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/admin/supplier"
         );
         setSuppliers(data.message);
       } catch (e) {
@@ -71,7 +71,7 @@ const LoadingData = () => {
       e.preventDefault();
       try {
         const { data } = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/loding/add",
+          "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/loding/add",
           { user, supplier, crop, quantity, amoumt, deliveryDate }
         );
         console.log(data);
@@ -113,7 +113,10 @@ const LoadingData = () => {
                 </Form.Select>
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Select aria-label="Default select example"  onChange={(e) => setS(e.target.value)}>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setS(e.target.value)}
+                >
                   <option>-- Select Supplier --</option>
                   {suppliers?.map((user, index) => (
                     <option key={index} value={user._id}>
@@ -125,19 +128,31 @@ const LoadingData = () => {
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Crop</Form.Label>
-                <Form.Control type="text"   onChange={(e) => setU(e.target.value)}/>
+                <Form.Control
+                  type="text"
+                  onChange={(e) => setU(e.target.value)}
+                />
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Quantity</Form.Label>
-                <Form.Control type="number"  onChange={(e) => setU(e.target.value)} />
+                <Form.Control
+                  type="number"
+                  onChange={(e) => setU(e.target.value)}
+                />
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Amount</Form.Label>
-                <Form.Control type="number"  onChange={(e) => setU(e.target.value)} />
+                <Form.Control
+                  type="number"
+                  onChange={(e) => setU(e.target.value)}
+                />
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Delivery Date</Form.Label>
-                <Form.Control type="date"  onChange={(e) => setU(e.target.value)} />
+                <Form.Control
+                  type="date"
+                  onChange={(e) => setU(e.target.value)}
+                />
               </Form.Group>
 
               <Button>Submit</Button>

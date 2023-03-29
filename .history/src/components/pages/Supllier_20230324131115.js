@@ -9,7 +9,6 @@ import { Button, Container, Form } from "react-bootstrap";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
 const Supllier = () => {
   const [modalShow, setModalShow] = React.useState(false);
 
@@ -19,7 +18,7 @@ const Supllier = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/createbid/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/createbid/all"
       );
       setData(data);
     } catch (err) {
@@ -36,10 +35,10 @@ const Supllier = () => {
       e.preventDefault();
       try {
         const data = await axios.put(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/createbid/verifyByAdmin/${id}`
+          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/createbid/verifyByAdmin/${id}`
         );
-        console.log(data)
-        setModalShow(false)
+        console.log(data);
+        setModalShow(false);
         toast.success("Status Changed");
         fetchData();
       } catch (err) {

@@ -37,21 +37,21 @@ const vehicle = [
 const Service = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [edit, setEdit] = useState(false);
-  const [ data , setData ] = useState([])
+  const [data, setData] = useState([]);
 
-  // Get Vehicle 
-  const  fetchData  = async () => {
-    try{
-      const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/transport")
-      setData(data)
-    }catch(e){
-      console.log(e)
+  // Get Vehicle
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get(
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/transport"
+      );
+      setData(data);
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
-  useEffect(() => {
-    
-  })
+  useEffect(() => {});
 
   // Edit/Add Modal
   function MyVerticallyCenteredModal(props) {
@@ -73,7 +73,6 @@ const Service = () => {
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Vehicle Number</Form.Label>
                 <Form.Control type="number" min={1} />
-
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -92,10 +91,8 @@ const Service = () => {
                 <Form.Label>Vehicle Route </Form.Label>
                 <Form.Control type="text" />
               </Form.Group>
-      
-              <Button variant="outline-success" >
-                Submit
-              </Button>
+
+              <Button variant="outline-success">Submit</Button>
             </Form>
           </Container>
         </Modal.Body>

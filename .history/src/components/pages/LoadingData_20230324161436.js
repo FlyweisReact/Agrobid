@@ -14,7 +14,7 @@ const LoadingData = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/loding/all"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/loding/all"
       );
       setData(data.data);
     } catch (e) {
@@ -27,43 +27,44 @@ const LoadingData = () => {
   }, []);
 
   function MyVerticallyCenteredModal(props) {
-
-    const [ users , setUsers ] = useState([])
-    const [ suppliers , setSuppliers ] = useState([])
+    const [users, setUsers] = useState([]);
+    const [suppliers, setSuppliers] = useState([]);
 
     const fetchUsers = async () => {
-      try{  
-        const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/admin/users")
-        setUsers(data.users)
-      }catch(e){
-        console.log(e)
+      try {
+        const { data } = await axios.get(
+          "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/admin/users"
+        );
+        setUsers(data.users);
+      } catch (e) {
+        console.log(e);
       }
-    }
+    };
 
     const fetchSupplier = async () => {
-      try{
-        const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/admin/supplier")
-        setSuppliers(data.message)
-      }catch(e){
-        console.log(e)
+      try {
+        const { data } = await axios.get(
+          "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/admin/supplier"
+        );
+        setSuppliers(data.message);
+      } catch (e) {
+        console.log(e);
       }
-    }
+    };
 
     useEffect(() => {
-      if(props.show === true) {
-        fetchSupplier()
-        fetchUsers()
+      if (props.show === true) {
+        fetchSupplier();
+        fetchUsers();
       }
-    },[props.show])
+    }, [props.show]);
 
-
-    const [user , setU ] = useState("")
-    const [ supplier , setS] = useState("")
-    const [crop , setC ] = useState("")
-    const [quantity , setQ ] = useState("")
-    const [amoumt , setA ] = useState("")
-    const [deliveryDate , setA ] = useState("")
-
+    const [user, setU] = useState("");
+    const [supplier, setS] = useState("");
+    const [crop, setC] = useState("");
+    const [quantity, setQ] = useState("");
+    const [amoumt, setA] = useState("");
+    const [deliveryDate, setA] = useState("");
 
     return (
       <Modal
@@ -83,16 +84,22 @@ const LoadingData = () => {
               <Form.Group className="mb-3">
                 <Form.Select aria-label="Default select example">
                   <option>-- Select User --</option>
-                  {users?.map((user , index) => (
-                    <option key={index} value={user._id} > {user.name}  </option>
+                  {users?.map((user, index) => (
+                    <option key={index} value={user._id}>
+                      {" "}
+                      {user.name}{" "}
+                    </option>
                   ))}
                 </Form.Select>
               </Form.Group>
               <Form.Group className="mb-3">
-              <Form.Select aria-label="Default select example">
+                <Form.Select aria-label="Default select example">
                   <option>-- Select Supplier --</option>
-                  {suppliers?.map((user , index) => (
-                    <option key={index} value={user._id} > {user.name}  </option>
+                  {suppliers?.map((user, index) => (
+                    <option key={index} value={user._id}>
+                      {" "}
+                      {user.name}{" "}
+                    </option>
                   ))}
                 </Form.Select>
               </Form.Group>

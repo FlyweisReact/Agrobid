@@ -4,36 +4,31 @@ import React, { useState } from "react";
 import HOC from "../layout/HOC";
 import Table from "react-bootstrap/Table";
 import Modal from "react-bootstrap/Modal";
-import {  AiFillEdit } from "react-icons/ai";
+import { AiFillEdit } from "react-icons/ai";
 import { Button, Container, Form } from "react-bootstrap";
 import axios from "axios";
-
-
 
 const Buyer = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [edit, setEdit] = useState(false);
 
-  const [ data , setData  ]  = useState([])
-  const [ dataCount , setDataCount] = useState('')
+  const [data, setData] = useState([]);
+  const [dataCount, setDataCount] = useState("");
 
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-     "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/admin/buyer"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/admin/buyer"
       );
       setData(data);
-      
     } catch (E) {
       console.log(E);
     }
   };
 
-
   useEffect(() => {
-    fetchData()
-  },[])
-
+    fetchData();
+  }, []);
 
   function MyVerticallyCenteredModal(props) {
     return (
@@ -62,7 +57,10 @@ const Buyer = () => {
                 </>
               ) : (
                 <>
-                  <select className="mySelect" style={{border : '1px solid black'}}>
+                  <select
+                    className="mySelect"
+                    style={{ border: "1px solid black" }}
+                  >
                     <option>Select</option>
                     <option>Success</option>
                     <option>Decline</option>

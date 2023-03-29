@@ -13,7 +13,7 @@ const Terms = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/terms"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/terms"
       );
       setData(data.data[0]);
     } catch (e) {
@@ -22,18 +22,15 @@ const Terms = () => {
   };
 
   function MyVerticallyCenteredModal(props) {
+    const [terms, setTerms] = useState("");
 
-    const  [ terms , setTerms ] = useState("")
-
-    const putHandler =  async (e) => {
-      e.preventDefault()
-      try{
-
-      }catch(e){
-        console.log(e)
+    const putHandler = async (e) => {
+      e.preventDefault();
+      try {
+      } catch (e) {
+        console.log(e);
       }
-    } 
-
+    };
 
     return (
       <Modal
@@ -50,7 +47,10 @@ const Terms = () => {
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3">
-              <FloatingLabel controlId="floatingTextarea" label="Terms&Condition">
+              <FloatingLabel
+                controlId="floatingTextarea"
+                label="Terms&Condition"
+              >
                 <Form.Control
                   as="textarea"
                   placeholder="Leave a comment here"

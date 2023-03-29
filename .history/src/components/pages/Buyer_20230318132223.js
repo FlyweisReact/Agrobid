@@ -13,11 +13,11 @@ const Buyer = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:4002/admin/buyer"
+        "https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/admin/buyer"
       );
       setData(data);
       setDataCount(data.message.length);
-      NotificationManager.success('Notification message', 'Title', 3000);
+      NotificationManager.success("Notification message", "Title", 3000);
     } catch (E) {
       console.log(E);
     }
