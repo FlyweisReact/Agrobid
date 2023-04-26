@@ -1,0 +1,3 @@
+
+5-Top10 bidder options not available in Admin even one can not reject the bidder,who refuses to pay.
+19- Value addition request, Loading timer & Inspection request notification spot is not defined in admin
