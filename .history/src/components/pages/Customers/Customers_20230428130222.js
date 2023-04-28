@@ -19,7 +19,6 @@ const Customers = () => {
       );
       setData(data.users);
       setUserCount(data.users.length);
-      console.log(data.users);
     } catch (E) {
       console.log(E);
     }
@@ -96,7 +95,7 @@ const Customers = () => {
             </tr>
           </thead>
           <tbody>
-            {filterData?.map((i, index) => (
+            {/* {filterData?.map((i, index) => (
               <tr key={index}>
                 <td> #{index + 1} </td>
                 <td>
@@ -108,9 +107,9 @@ const Customers = () => {
                 <td> {i.phoneNumber} </td>
                 <td> {i.email} </td>
                 <td> {i.tradeName} </td>
-                <td> {i.address?.[0]?.homeaddress + i.address?.[0]?.city} </td>
-
+                <td> {i.address} </td>
                 <td> {i.role} </td>
+
                 <td>
                   <i
                     className="fa-solid fa-trash"
@@ -119,7 +118,7 @@ const Customers = () => {
                   ></i>
                 </td>
               </tr>
-            ))}
+            ))} */}
           </tbody>
         </Table>
       </div>

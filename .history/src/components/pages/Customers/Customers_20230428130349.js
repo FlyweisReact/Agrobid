@@ -19,7 +19,7 @@ const Customers = () => {
       );
       setData(data.users);
       setUserCount(data.users.length);
-      console.log(data.users);
+      console.log(data.users)
     } catch (E) {
       console.log(E);
     }
@@ -106,11 +106,13 @@ const Customers = () => {
                   <Link to={`/customer/${i._id}`}>{i.name}</Link>
                 </td>
                 <td> {i.phoneNumber} </td>
+                <td> {i.phoneNumber} </td>
+                {/* 
                 <td> {i.email} </td>
                 <td> {i.tradeName} </td>
-                <td> {i.address?.[0]?.homeaddress + i.address?.[0]?.city} </td>
+                <td> {i.address} </td>
+                <td> {i.role} </td> */}
 
-                <td> {i.role} </td>
                 <td>
                   <i
                     className="fa-solid fa-trash"
