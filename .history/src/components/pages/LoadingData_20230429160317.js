@@ -212,7 +212,7 @@ const LoadingData = () => {
       (i) =>
         i?.crop?.toLowerCase().includes(query?.toLowerCase()) ||
         i?.supplier?.name?.toLowerCase().includes(query?.toLowerCase())  ||
-        i?.deliveryDate?.toLowerCase().includes(query?.toLowerCase()) 
+        i?.supplier?.name?.toLowerCase().includes(query?.toLowerCase()) 
      
     );
 
@@ -232,28 +232,10 @@ const LoadingData = () => {
         </div>
       </section>
 
-      <div style={{ marginTop: "2%" }}>
-        <div style={{ color: "black" }}>
-          Search:{" "}
-          <input
-            type={"search"}
-            style={{
-              border: "1px solid #bfbfbf",
-              width: "400px",
-              color: "black",
-              padding: "5px",
-            }}
-            placeholder="Search by Supplier Name , Crop , Delivery Date.."
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </div>
-      </div>
-
       <div
         style={{
           width: "100%",
           overflowX: "scroll",
-          marginTop : '2%'
         }}
       >
         <Table
@@ -276,7 +258,7 @@ const LoadingData = () => {
             </tr>
           </thead>
           <tbody>
-            {filterData?.map((i, index) => (
+            {data?.map((i, index) => (
               <tr key={index}>
                 <td> {index + 1} </td>
                 <td> {i.user?.name} </td>

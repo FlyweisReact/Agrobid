@@ -30,7 +30,7 @@ const Discount = () => {
     : data?.filter(
         (i) =>
           i?.user?.name?.toLowerCase().includes(query?.toLowerCase()) ||
-          i?.panNumber
+          i?.phoneNumber
             ?.toString()
             ?.toLowerCase()
             .includes(query?.toLowerCase())
@@ -50,22 +50,6 @@ const Discount = () => {
       </section>
 
 
-  <div style={{ marginTop: "2%" }}>
-        <div style={{ color: "black" }}>
-          Search:{" "}
-          <input
-            type={"search"}
-            style={{
-              border: "1px solid #bfbfbf",
-              width: "250px",
-              color: "black",
-              padding: "5px",
-            }}
-            placeholder="Search by Name , Pan number.."
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </div>
-      </div>
 
       <div style={{ overflow: "auto", marginTop: "2%" }}>
         <Table striped bordered hover>
@@ -92,7 +76,7 @@ const Discount = () => {
             </tr>
           </thead>
           <tbody>
-            {filterData?.map((i, index) => (
+            {data?.map((i, index) => (
               <tr key={index}>
                 <td> {index + 1} </td>
                 <td> {i.user?.name} </td>

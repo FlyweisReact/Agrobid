@@ -191,7 +191,7 @@ const MandiRates = () => {
             type={"search"}
             style={{
               border: "1px solid #bfbfbf",
-              width: "250px",
+              width: "300px",
               color: "black",
               padding: "5px",
             }}

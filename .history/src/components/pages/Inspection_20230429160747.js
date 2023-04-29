@@ -211,7 +211,7 @@ const Inspection = () => {
             type={"search"}
             style={{
               border: "1px solid #bfbfbf",
-              width: "300px",
+              width: "250px",
               color: "black",
               padding: "5px",
             }}

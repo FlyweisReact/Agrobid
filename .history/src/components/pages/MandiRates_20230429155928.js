@@ -195,7 +195,7 @@ const MandiRates = () => {
               color: "black",
               padding: "5px",
             }}
-            placeholder="Search by Product , Location.."
+            placeholder="Search by Product , Phone number.."
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>

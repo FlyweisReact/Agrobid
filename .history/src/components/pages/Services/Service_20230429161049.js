@@ -227,24 +227,6 @@ const Service = () => {
         </div>
       </section>
 
-      <div style={{ marginTop: "2%" }}>
-        <div style={{ color: "black" }}>
-          Search:{" "}
-          <input
-            type={"search"}
-            style={{
-              border: "1px solid #bfbfbf",
-              width: "250px",
-              color: "black",
-              padding: "5px",
-            }}
-            placeholder="Search by Vehicle Number"
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </div>
-      </div>
-
-
       <Table
         striped
         bordered

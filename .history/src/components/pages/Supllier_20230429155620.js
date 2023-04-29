@@ -78,7 +78,7 @@ const Supllier = () => {
       </div>
 
       <div
-     style={{width: '100%' , overflow : 'auto' , marginTop : '3%'}}
+     style={{width: '100%' , overflow : 'auto'}}
       >
         <Table striped bordered hover >
           <thead >

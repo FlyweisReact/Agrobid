@@ -60,25 +60,10 @@ const Supllier = () => {
       </section>
 
 
-      <div style={{ marginTop: "2%" }}>
-        <div style={{ color: "black" }}>
-          Search:{" "}
-          <input
-            type={"search"}
-            style={{
-              border: "1px solid #bfbfbf",
-              width: "250px",
-              color: "black",
-              padding: "5px",
-            }}
-            placeholder="Search by Name , Phone number.."
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </div>
-      </div>
+  
 
       <div
-     style={{width: '100%' , overflow : 'auto' , marginTop : '3%'}}
+     style={{width: '100%' , overflow : 'auto'}}
       >
         <Table striped bordered hover >
           <thead >
@@ -95,7 +80,7 @@ const Supllier = () => {
             </tr>
           </thead>
           <tbody>
-            {filterData?.map((i, index) => (
+            {data?.map((i, index) => (
               <tr key={index}>
                 <td > #{index + 1} </td>
                 <td >

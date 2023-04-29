@@ -238,7 +238,7 @@ const Service = () => {
               color: "black",
               padding: "5px",
             }}
-            placeholder="Search by Vehicle Number"
+            placeholder="Search by Name , Phone number.."
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>

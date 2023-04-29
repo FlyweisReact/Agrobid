@@ -108,7 +108,7 @@ const Language = () => {
               color: "black",
               padding: "5px",
             }}
-            placeholder="Search by Language.."
+            placeholder="Search by N.."
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>

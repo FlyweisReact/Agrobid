@@ -173,7 +173,7 @@ const Inspection = () => {
       (i) =>
         i?.name?.toLowerCase().includes(query?.toLowerCase()) ||
         i?.price
-        ?.toString()
+          ?.price()
           ?.toLowerCase()
           .includes(query?.toLowerCase())
     );
@@ -203,25 +203,6 @@ const Inspection = () => {
         </div>
       </section>
 
-
-      <div style={{ marginTop: "2%" }}>
-        <div style={{ color: "black" }}>
-          Search:{" "}
-          <input
-            type={"search"}
-            style={{
-              border: "1px solid #bfbfbf",
-              width: "300px",
-              color: "black",
-              padding: "5px",
-            }}
-            placeholder="Search by Company Name , Price.."
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </div>
-      </div>
-
-
       <Table
         striped
         bordered
@@ -229,7 +210,6 @@ const Inspection = () => {
         style={{
           overflow: "scroll",
           width: "100%",
-          marginTop : '2%'
         }}
       >
         <thead>
@@ -244,7 +224,7 @@ const Inspection = () => {
           </tr>
         </thead>
         <tbody>
-          {filterData?.map((i, index) => (
+          {data?.map((i, index) => (
             <tr key={index}>
               <td> {index + 1} </td>
               <td> {i.name} </td>

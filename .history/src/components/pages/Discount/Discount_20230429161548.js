@@ -50,22 +50,6 @@ const Discount = () => {
       </section>
 
 
-  <div style={{ marginTop: "2%" }}>
-        <div style={{ color: "black" }}>
-          Search:{" "}
-          <input
-            type={"search"}
-            style={{
-              border: "1px solid #bfbfbf",
-              width: "250px",
-              color: "black",
-              padding: "5px",
-            }}
-            placeholder="Search by Name , Pan number.."
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </div>
-      </div>
 
       <div style={{ overflow: "auto", marginTop: "2%" }}>
         <Table striped bordered hover>

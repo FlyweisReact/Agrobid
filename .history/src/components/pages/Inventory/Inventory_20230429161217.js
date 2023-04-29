@@ -161,24 +161,6 @@ const Inventory = () => {
         </div>
       </section>
 
-      
-      <div style={{ marginTop: "2%" }}>
-        <div style={{ color: "black" }}>
-          Search:{" "}
-          <input
-            type={"search"}
-            style={{
-              border: "1px solid #bfbfbf",
-              width: "250px",
-              color: "black",
-              padding: "5px",
-            }}
-            placeholder="Search by Name "
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </div>
-      </div>
-
       <div style={{ overflow: "auto" }}>
         <Table
           striped
@@ -202,7 +184,7 @@ const Inventory = () => {
             </tr>
           </thead>
           <tbody>
-            {filterData?.map((i, index) => (
+            {data?.result?.map((i, index) => (
               <tr key={index}>
                 <td>#{index + 1} </td>
                 <td>

@@ -239,11 +239,11 @@ const LoadingData = () => {
             type={"search"}
             style={{
               border: "1px solid #bfbfbf",
-              width: "400px",
+              width: "250px",
               color: "black",
               padding: "5px",
             }}
-            placeholder="Search by Supplier Name , Crop , Delivery Date.."
+            placeholder="Search by Name , Phone number.."
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>

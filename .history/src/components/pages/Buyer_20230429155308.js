@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const Buyer = () => {
   const [data, setData] = useState([]);
   const [dataCount, setDataCount] = useState("");
-  const [query, setQuery] = useState("");
+  
 
   const fetchData = async () => {
     try {
@@ -39,10 +39,10 @@ const Buyer = () => {
   }
 
   const filterData = !query
-  ? data?.message
-  : data?.message?.filter(
+  ? data
+  : data?.filter(
       (i) =>
-        i?.tradeName?.toLowerCase().includes(query?.toLowerCase()) ||
+        i?.name?.toLowerCase().includes(query?.toLowerCase()) ||
         i?.phoneNumber
           ?.toString()
           ?.toLowerCase()
@@ -62,23 +62,6 @@ const Buyer = () => {
           </span>
         </div>
       </section>
-
-      <div style={{ marginTop: "2%" }}>
-        <div style={{ color: "black" }}>
-          Search:{" "}
-          <input
-            type={"search"}
-            style={{
-              border: "1px solid #bfbfbf",
-              width: "250px",
-              color: "black",
-              padding: "5px",
-            }}
-            placeholder="Search by Name , Phone number.."
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </div>
-      </div>
 
       <div
         style={{
@@ -107,7 +90,7 @@ const Buyer = () => {
             </tr>
           </thead>
           <tbody>
-            {filterData?.map((i, index) => (
+            {data?.message?.map((i, index) => (
               <tr key={index}>
                 <td> #{index + 1} </td>
                 <td>

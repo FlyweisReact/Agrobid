@@ -195,13 +195,13 @@ const MandiRates = () => {
               color: "black",
               padding: "5px",
             }}
-            placeholder="Search by Product , Location.."
+            placeholder="Search by Name , Phone number.."
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>
       </div>
 
-
+      
 
       <div style={{ marginTop: "2%", overflow: "auto" }}>
         <Table striped bordered hover>

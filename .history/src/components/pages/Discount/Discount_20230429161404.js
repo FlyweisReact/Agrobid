@@ -9,7 +9,6 @@ import axios from "axios";
 
 const Discount = () => {
   const [ data , setData ] = useState([])
-  const [query, setQuery] = useState("");
 
   const fetchData = async () => {
     try{
@@ -24,17 +23,9 @@ const Discount = () => {
     fetchData()
   },[])
 
+  // Serach Bar
 
-  const filterData = !query
-    ? data
-    : data?.filter(
-        (i) =>
-          i?.user?.name?.toLowerCase().includes(query?.toLowerCase()) ||
-          i?.panNumber
-            ?.toString()
-            ?.toLowerCase()
-            .includes(query?.toLowerCase())
-      );
+
 
 
   return (
@@ -45,28 +36,23 @@ const Discount = () => {
           <span className="tracking-widest text-slate-900 font-semibold uppercase ">
             All Documents
           </span>
-         
+          <div style={{ color: "black" }}>
+            <input
+              type="search"
+              style={{
+                width: "300px",
+                border: "1px solid black",
+                color: "black",
+                padding: "5px",
+                height: "40px",
+                fontSize: "18px",
+              }}
+              placeholder='Search by Name , Phone Number....'
+              onChange={handlerChange}
+            />
+          </div>
         </div>
       </section>
-
-
-  <div style={{ marginTop: "2%" }}>
-        <div style={{ color: "black" }}>
-          Search:{" "}
-          <input
-            type={"search"}
-            style={{
-              border: "1px solid #bfbfbf",
-              width: "250px",
-              color: "black",
-              padding: "5px",
-            }}
-            placeholder="Search by Name , Pan number.."
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </div>
-      </div>
-
       <div style={{ overflow: "auto", marginTop: "2%" }}>
         <Table striped bordered hover>
           <thead>
@@ -92,7 +78,7 @@ const Discount = () => {
             </tr>
           </thead>
           <tbody>
-            {filterData?.map((i, index) => (
+            {data?.map((i, index) => (
               <tr key={index}>
                 <td> {index + 1} </td>
                 <td> {i.user?.name} </td>

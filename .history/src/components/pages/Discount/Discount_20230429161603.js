@@ -61,7 +61,7 @@ const Discount = () => {
               color: "black",
               padding: "5px",
             }}
-            placeholder="Search by Name , Pan number.."
+            placeholder="Search by Name , Phone number.."
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>

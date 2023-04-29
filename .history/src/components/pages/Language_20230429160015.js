@@ -9,6 +9,7 @@ import HOC from "../layout/HOC";
 
 const Language = () => {
   const [show, setShow] = useState(false);
+
   const [query, setQuery] = useState("");
   const [ data , setData ] = useState([])
 
@@ -79,13 +80,6 @@ const Language = () => {
     }
   }
 
-  const filterData = !query
-  ? data
-  : data?.filter(
-      (i) =>
-        i?.language?.toLowerCase().includes(query?.toLowerCase())
-    );
-
   return (
     <>
       <AddRatesModal show={show} onHide={() => setShow(false)} />
@@ -96,24 +90,6 @@ const Language = () => {
           Add New
         </Button>
       </div>
-
-      <div style={{ marginTop: "2%" }}>
-        <div style={{ color: "black" }}>
-          Search:{" "}
-          <input
-            type={"search"}
-            style={{
-              border: "1px solid #bfbfbf",
-              width: "250px",
-              color: "black",
-              padding: "5px",
-            }}
-            placeholder="Search by Language.."
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </div>
-      </div>
-
       <div style={{ marginTop: "1%", overflow: "auto" }}>
         <Table striped bordered hover>
           <thead>
@@ -124,7 +100,7 @@ const Language = () => {
             </tr>
           </thead>
           <tbody>
-          {filterData?.map((i , index) => (
+          {data?.map((i , index) => (
             <tr key={index}>
               <td> {index + 1} </td>
               <td>{i.language}</td>
