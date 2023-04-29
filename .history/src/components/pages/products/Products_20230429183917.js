@@ -208,7 +208,7 @@ const Products = () => {
         return (
           <Modal
             {...props}
-            size="lg"
+            size="lg-down"
             aria-labelledby="contained-modal-title-vcenter"
             centered
           >
@@ -228,18 +228,12 @@ const Products = () => {
                     <td>Supplier Name</td>
                     <td>Supplier Phone Number</td>
                     <td>Amount</td>
-                    <td>Status</td>
+                    <td></td>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>#1</td>
-                    <td> Babu </td>
-                    <td>9999415074  </td>
-                    <td> demo </td>
-                    <td>9911161444  </td>
-                    <td> 1000  </td>
-                    <td> Payment Successfull  </td>
                   </tr>
                 </tbody>
               </Table>

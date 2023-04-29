@@ -208,7 +208,7 @@ const Products = () => {
         return (
           <Modal
             {...props}
-            size="lg"
+            // size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
           >

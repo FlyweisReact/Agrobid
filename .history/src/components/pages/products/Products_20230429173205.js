@@ -16,8 +16,7 @@ const Products = () => {
   const [secondTab, setSecondTab] = useState(false);
   const [show, setShow] = useState(false);
   const [lotIdData, setLotIdData] = useState([]);
-  const [query, setQuery] = useState("");
-  const [ modalShow2 , setModalShow2] = useState(false)
+  const [ query , setQuery  ] = useState("")
 
   const fetchHandler = useCallback(async () => {
     try {
@@ -69,7 +68,13 @@ const Products = () => {
       }
     };
 
- 
+    const handleChange = (e) => {
+      const inputDate = new Date(e.target.value);
+      const localDate = new Date(inputDate.getTime() - inputDate.getTimezoneOffset() * 60000)
+        .toISOString()
+        setExpireTime(localDate)
+    }
+
 
     return (
       <Modal
@@ -89,7 +94,7 @@ const Products = () => {
               <Form.Label>Expiry Time</Form.Label>
               <Form.Control
                 type="datetime-local"
-                onChange={(e) => setExpireTime(e.target.value)}
+                onChange={(e) => handleChange(e)}
               />
             </Form.Group>
             <Button variant="outline-success" type="submit">
@@ -194,61 +199,18 @@ const Products = () => {
     );
   }
 
+
   const filterData = !query
     ? data?.data
     : data?.data?.filter(
         (i) =>
           i?.user_id?.tradeName?.toLowerCase().includes(query?.toLowerCase()) ||
           i?.crop?.name?.toLowerCase().includes(query?.toLowerCase()) ||
-          i?.lotId?.toString()?.toLowerCase().includes(query?.toLowerCase())
+          i?.lotId
+            ?.toString()
+            ?.toLowerCase()
+            .includes(query?.toLowerCase())
       );
-
-  
-      function MyVerticallyCenteredModal3(props) { 
-        return (
-          <Modal
-            {...props}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-          >
-            <Modal.Header closeButton>
-              <Modal.Title id="contained-modal-title-vcenter">
-                Transaction
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-             <div style={{width : '100%' , overflow  : 'auto'}}>
-              <Table striped bordered hover >
-                <thead>
-                  <tr>
-                    <td>SNo.</td>
-                    <td>Buyer Name</td>
-                    <td>Buyer Phone Number</td>
-                    <td>Supplier Name</td>
-                    <td>Supplier Phone Number</td>
-                    <td>Amount</td>
-                    <td>Status</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>#1</td>
-                    <td> Babu </td>
-                    <td>9999415074  </td>
-                    <td> demo </td>
-                    <td>9911161444  </td>
-                    <td> 1000  </td>
-                    <td> Payment Successfull  </td>
-                  </tr>
-                </tbody>
-              </Table>
-             </div>
-            </Modal.Body>
-            <Modal.Footer></Modal.Footer>
-          </Modal>
-        );
-      }
 
   return (
     <>
@@ -257,8 +219,6 @@ const Products = () => {
         onHide={() => setModalShow(false)}
       />
       <BidModal show={show} onHide={() => setShow(false)} />
-
-      <MyVerticallyCenteredModal3 show={modalShow2} onHide={() => setModalShow2(false)} />
 
       <section>
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">
@@ -314,94 +274,91 @@ const Products = () => {
         </>
       ) : (
         <>
-          <div style={{ marginTop: "2%" }}>
-            <div style={{ color: "black" }}>
-              Search:{" "}
-              <input
-                type={"search"}
-                style={{
-                  border: "1px solid #bfbfbf",
-                  width: "250px",
-                  color: "black",
-                  padding: "5px",
-                }}
-                placeholder="Search by Name , Crop ..."
-                onChange={(e) => setQuery(e.target.value)}
-              />
-            </div>
-          </div>
-
-          <div
+        <div style={{ marginTop: "2%" }}>
+        <div style={{ color: "black" }}>
+          Search:{" "}
+          <input
+            type={"search"}
             style={{
-              overflow: "auto",
-              marginTop: "2%",
+              border: "1px solid #bfbfbf",
+              width: "250px",
+              color: "black",
+              padding: "5px",
             }}
-          >
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>SNo.</th>
-                  <th>Lot Id</th>
-                  <th>Supp Name</th>
-                  <th>Crop</th>
-                  <th>Status</th>
-                  <th>Expiry Time Edit</th>
-                  <th>Expected Bid</th>
-                  <th>Highest Bid</th>
-                  <th>Total Bid</th>
-                  <th>Top 10 Bidder/ Remaining Bidder</th>
-                  <th>Transaction</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filterData?.map((i, index) => (
-                  <tr key={index}>
-                    <td> #{index + 1} </td>
-                    <td
+            placeholder="Search by Name , Crop ..."
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </div>
+      </div>
+
+        <div
+          style={{
+            overflow: "auto",
+            marginTop :'2%'
+          }}
+        >
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>SNo.</th>
+                <th>Lot Id</th>
+                <th>Supp Name</th>
+                <th>Crop</th>
+                <th>Status</th>
+                <th>Expiry Time Edit</th>
+                <th>Expected Bid</th>
+                <th>Highest Bid</th>
+                <th>Total Bid</th>
+                <th>Top 10 Bidder/ Remaining Bidder</th>
+                <th>Tra</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filterData?.map((i, index) => (
+                <tr key={index}>
+                  <td> #{index + 1} </td>
+                  <td
+                    onClick={() => {
+                      fetchSingleBid(i.lotId);
+                    }}
+                    style={{ color: "blue", cursor: "pointer" }}
+                  >
+                    {" "}
+                    {i.lotId}{" "}
+                  </td>
+                  <td> {i.user_id?.tradeName} </td>
+                  <td> {i.crop?.name} </td>
+                  <td> {i.status} </td>
+                  <td> {i.expiretime} </td>
+                  <td> {i.expectedRate} </td>
+                  <td> {i.topBid} </td>
+                  <td> {i.count} </td>
+                  <td>
+                    <Button
                       onClick={() => {
-                        fetchSingleBid(i.lotId);
+                        setId(i._id);
+                        setShow(true);
                       }}
-                      style={{ color: "blue", cursor: "pointer" }}
                     >
-                      {" "}
-                      {i.lotId}{" "}
-                    </td>
-                    <td> {i.user_id?.tradeName} </td>
-                    <td> {i.crop?.name} </td>
-                    <td> {i.status} </td>
-                    <td> {i.expiretime} </td>
-                    <td> {i.expectedRate} </td>
-                    <td> {i.topBid} </td>
-                    <td> {i.count} </td>
-                    <td>
-                      <Button
-                        onClick={() => {
-                          setId(i._id);
-                          setShow(true);
-                        }}
-                      >
-                        View
-                      </Button>
-                    </td>
-                    <td>
-                      <Button onClick={() => setModalShow2(true)} >View</Button>
-                    </td>
-                    <td>
-                      <i
-                        className="fa-solid fa-pen-to-square"
-                        style={{ color: "blue", cursor: "pointer" }}
-                        onClick={() => {
-                          setId(i._id);
-                          setModalShow(true);
-                        }}
-                      ></i>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </div>
+                      View
+                    </Button>
+                  </td>
+                  <td>
+                    <i
+                      className="fa-solid fa-pen-to-square"
+                      style={{ color: "blue", cursor: "pointer" }}
+                      onClick={() => {
+                        setId(i._id);
+                        setModalShow(true);
+                      }}
+                    ></i>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
         </>
       )}
     </>

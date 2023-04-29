@@ -266,7 +266,7 @@ const LoadingData = () => {
               <th>Sno.</th>
               <th>User</th>
               <th> Supllier </th>
-              <th>Vehicle Number</th>
+              <th>Vehicle Nu</th>
               <th>Crop</th>
               <th>Quantity</th>
               <th>Amount</th>
@@ -282,7 +282,6 @@ const LoadingData = () => {
                 <td> {index + 1} </td>
                 <td> {i.user?.name} </td>
                 <td> {i.supplier?.name} </td>
-                <td> 452145 </td>
                 <td> {i.crop} </td>
                 <td> {i.quantity} </td>
                 <td> ₹{i.amount} </td>

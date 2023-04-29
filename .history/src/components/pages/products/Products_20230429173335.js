@@ -17,7 +17,6 @@ const Products = () => {
   const [show, setShow] = useState(false);
   const [lotIdData, setLotIdData] = useState([]);
   const [query, setQuery] = useState("");
-  const [ modalShow2 , setModalShow2] = useState(false)
 
   const fetchHandler = useCallback(async () => {
     try {
@@ -69,7 +68,13 @@ const Products = () => {
       }
     };
 
- 
+    const handleChange = (e) => {
+      const inputDate = new Date(e.target.value);
+      const localDate = new Date(
+        inputDate.getTime() - inputDate.getTimezoneOffset() * 60000
+      ).toISOString();
+      setExpireTime(localDate);
+    };
 
     return (
       <Modal
@@ -89,7 +94,7 @@ const Products = () => {
               <Form.Label>Expiry Time</Form.Label>
               <Form.Control
                 type="datetime-local"
-                onChange={(e) => setExpireTime(e.target.value)}
+                onChange={(e) => handleChange(e)}
               />
             </Form.Group>
             <Button variant="outline-success" type="submit">
@@ -204,46 +209,58 @@ const Products = () => {
       );
 
   
-      function MyVerticallyCenteredModal3(props) { 
+      function MyVerticallyCenteredModal(props) {
+        const [expiretime, setExpireTime] = useState("");
+    
+        const putHandler = async (e) => {
+          e.preventDefault();
+          try {
+            const { data } = await axios.put(
+              `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/createbid/verifyByAdmin/${id}`,
+              { expiretime }
+            );
+            console.log(data);
+            toast.success("Success");
+            props.onHide();
+            fetchHandler();
+          } catch (e) {
+            console.log(e);
+          }
+        };
+    
+        const handleChange = (e) => {
+          const inputDate = new Date(e.target.value);
+          const localDate = new Date(
+            inputDate.getTime() - inputDate.getTimezoneOffset() * 60000
+          ).toISOString();
+          setExpireTime(localDate);
+        };
+    
         return (
           <Modal
             {...props}
-            size="lg"
+            size="lg-down"
             aria-labelledby="contained-modal-title-vcenter"
             centered
           >
             <Modal.Header closeButton>
               <Modal.Title id="contained-modal-title-vcenter">
-                Transaction
+                Edit Status
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-             <div style={{width : '100%' , overflow  : 'auto'}}>
-              <Table striped bordered hover >
-                <thead>
-                  <tr>
-                    <td>SNo.</td>
-                    <td>Buyer Name</td>
-                    <td>Buyer Phone Number</td>
-                    <td>Supplier Name</td>
-                    <td>Supplier Phone Number</td>
-                    <td>Amount</td>
-                    <td>Status</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>#1</td>
-                    <td> Babu </td>
-                    <td>9999415074  </td>
-                    <td> demo </td>
-                    <td>9911161444  </td>
-                    <td> 1000  </td>
-                    <td> Payment Successfull  </td>
-                  </tr>
-                </tbody>
-              </Table>
-             </div>
+              <Form onSubmit={putHandler}>
+                <Form.Group className="mb-3">
+                  <Form.Label>Expiry Time</Form.Label>
+                  <Form.Control
+                    type="datetime-local"
+                    onChange={(e) => handleChange(e)}
+                  />
+                </Form.Group>
+                <Button variant="outline-success" type="submit">
+                  Submit
+                </Button>
+              </Form>
             </Modal.Body>
             <Modal.Footer></Modal.Footer>
           </Modal>
@@ -257,8 +274,6 @@ const Products = () => {
         onHide={() => setModalShow(false)}
       />
       <BidModal show={show} onHide={() => setShow(false)} />
-
-      <MyVerticallyCenteredModal3 show={modalShow2} onHide={() => setModalShow2(false)} />
 
       <section>
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">
@@ -385,7 +400,7 @@ const Products = () => {
                       </Button>
                     </td>
                     <td>
-                      <Button onClick={() => setModalShow2(true)} >View</Button>
+                      <Button>View</Button>
                     </td>
                     <td>
                       <i

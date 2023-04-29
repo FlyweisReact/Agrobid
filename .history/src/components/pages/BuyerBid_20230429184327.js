@@ -13,7 +13,6 @@ const BuyerBid = () => {
   const [secondTab, setSecondTab] = useState(false);
   const [lotIdData, setLotIdData] = useState([]);
   const [modalShow, setModalShow] = useState(false);
-  const [ modalShow2 , setModalShow2] = useState(false)
   const [bidId, setBidId] = useState("");
   const [query, setQuery] = useState("");
 
@@ -99,52 +98,6 @@ const BuyerBid = () => {
     );
   }
 
-  function MyVerticallyCenteredModal3(props) {
-    return (
-      <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Transaction
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div style={{ width: "100%", overflow: "auto" }}>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <td>SNo.</td>
-                  <td>Buyer Name</td>
-                  <td>Buyer Phone Number</td>
-                  <td>Supplier Name</td>
-                  <td>Supplier Phone Number</td>
-                  <td>Amount</td>
-                  <td>Status</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>#1</td>
-                  <td> Babu </td>
-                  <td>9999415074 </td>
-                  <td> demo </td>
-                  <td>9911161444 </td>
-                  <td> 1000 </td>
-                  <td> Payment Successfull </td>
-                </tr>
-              </tbody>
-            </Table>
-          </div>
-        </Modal.Body>
-        <Modal.Footer></Modal.Footer>
-      </Modal>
-    );
-  }
-
   const filterData = !query
     ? data
     : data?.filter(
@@ -160,10 +113,8 @@ const BuyerBid = () => {
     <>
       <MyVerticallyCenteredModal
         show={modalShow}
-        onHide={() => setModalShow(false)}
-      />  
-      <MyVerticallyCenteredModal3 show={modalShow2} onHide={() => setModalShow2(false)} />
-
+        onHide={() => setModalShow(true)}
+      />
       <section>
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">
           <span className="tracking-widest text-slate-900 font-semibold uppercase ">
@@ -255,7 +206,6 @@ const BuyerBid = () => {
                   <th>Highest Bid </th>
                   <th>Total Bid </th>
                   <th>Inspection Requested </th>
-                  <th>Transaction</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -281,9 +231,6 @@ const BuyerBid = () => {
                     <td> {i.bidDetail?.topBid} </td>
                     <td> {i.bidDetail?.count} </td>
                     <td> {i.inspection === false ? "False" : "True"} </td>
-                    <td>
-                      <Button onClick={() => setModalShow2(true)} >View</Button>
-                    </td>
                     <td>
                       <i
                         className="fa-solid fa-edit"

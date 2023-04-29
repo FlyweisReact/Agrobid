@@ -13,7 +13,6 @@ const BuyerBid = () => {
   const [secondTab, setSecondTab] = useState(false);
   const [lotIdData, setLotIdData] = useState([]);
   const [modalShow, setModalShow] = useState(false);
-  const [ modalShow2 , setModalShow2] = useState(false)
   const [bidId, setBidId] = useState("");
   const [query, setQuery] = useState("");
 
@@ -160,10 +159,8 @@ const BuyerBid = () => {
     <>
       <MyVerticallyCenteredModal
         show={modalShow}
-        onHide={() => setModalShow(false)}
-      />  
-      <MyVerticallyCenteredModal3 show={modalShow2} onHide={() => setModalShow2(false)} />
-
+        onHide={() => setModalShow(true)}
+      />
       <section>
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">
           <span className="tracking-widest text-slate-900 font-semibold uppercase ">
@@ -255,7 +252,6 @@ const BuyerBid = () => {
                   <th>Highest Bid </th>
                   <th>Total Bid </th>
                   <th>Inspection Requested </th>
-                  <th>Transaction</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -281,9 +277,6 @@ const BuyerBid = () => {
                     <td> {i.bidDetail?.topBid} </td>
                     <td> {i.bidDetail?.count} </td>
                     <td> {i.inspection === false ? "False" : "True"} </td>
-                    <td>
-                      <Button onClick={() => setModalShow2(true)} >View</Button>
-                    </td>
                     <td>
                       <i
                         className="fa-solid fa-edit"

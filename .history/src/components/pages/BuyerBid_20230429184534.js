@@ -161,8 +161,7 @@ const BuyerBid = () => {
       <MyVerticallyCenteredModal
         show={modalShow}
         onHide={() => setModalShow(false)}
-      />  
-      <MyVerticallyCenteredModal3 show={modalShow2} onHide={() => setModalShow2(false)} />
+      />  <MyVerticallyCenteredModal3 show={modalShow2} onHide={() => setModalShow2(false)} />
 
       <section>
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">

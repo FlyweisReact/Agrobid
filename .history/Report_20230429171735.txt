@@ -1,0 +1,8 @@
+1-Search bar is missing in all data oriented tabs like you have given in User tab -- done
+1a-Transaction tab in user/seller/buyer should be within Bid, so that we relate to particular lot ( api )
+1c-Amount paid & amount due in respect to buyer & seller yet not reflecting anywhere in Bid
+1d-Inspection requested by buyer or new product value addition request from buyer either should auto corrected or fresh request
+2-Master Tax, Correction & Additional charges are missing.
+3-Master crop as discussed  ( )
+4-Transporter lead status is static it should be editable  ( api )
+5-All loading data column has Vehicle number missing (And otp auto feed)-Manish knows that ( api  )
