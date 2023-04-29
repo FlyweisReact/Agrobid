@@ -183,7 +183,7 @@ const News = () => {
               color: "black",
               padding: "5px",
             }}
-            placeholder="Search by Title"
+            placeholder="Search by Title , Phone number.."
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>

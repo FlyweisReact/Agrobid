@@ -91,7 +91,7 @@ const Sidebar = ({ hamb, setHamb }) => {
     {
       icon: <BsFillImageFill className="text-xl mr-3" />,
       link: "/tax",
-      name: "Tax",
+      name: "Master Crop",
     },
     {
       icon: <BsCartCheck className="text-xl mr-3" />,

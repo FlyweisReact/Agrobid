@@ -285,7 +285,7 @@ const Products = () => {
               color: "black",
               padding: "5px",
             }}
-            placeholder="Search by Name , Crop ..."
+            placeholder="Search by Name , Phone number.."
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>

@@ -68,14 +68,6 @@ const Products = () => {
       }
     };
 
-    const handleChange = (e) => {
-      const inputDate = new Date(e.target.value);
-      const localDate = new Date(inputDate.getTime() - inputDate.getTimezoneOffset() * 60000)
-        .toISOString()
-        setExpireTime(localDate)
-    }
-
-
     return (
       <Modal
         {...props}
@@ -94,7 +86,7 @@ const Products = () => {
               <Form.Label>Expiry Time</Form.Label>
               <Form.Control
                 type="datetime-local"
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => setExpireTime(e.target.value)}
               />
             </Form.Group>
             <Button variant="outline-success" type="submit">
@@ -199,18 +191,8 @@ const Products = () => {
     );
   }
 
+  
 
-  const filterData = !query
-    ? data?.data
-    : data?.data?.filter(
-        (i) =>
-          i?.user_id?.tradeName?.toLowerCase().includes(query?.toLowerCase()) ||
-          i?.crop?.name?.toLowerCase().includes(query?.toLowerCase()) ||
-          i?.lotId
-            ?.toString()
-            ?.toLowerCase()
-            .includes(query?.toLowerCase())
-      );
 
   return (
     <>
@@ -273,28 +255,9 @@ const Products = () => {
           </div>
         </>
       ) : (
-        <>
-        <div style={{ marginTop: "2%" }}>
-        <div style={{ color: "black" }}>
-          Search:{" "}
-          <input
-            type={"search"}
-            style={{
-              border: "1px solid #bfbfbf",
-              width: "250px",
-              color: "black",
-              padding: "5px",
-            }}
-            placeholder="Search by Name , Crop ..."
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </div>
-      </div>
-
         <div
           style={{
             overflow: "auto",
-            marginTop :'2%'
           }}
         >
           <Table striped bordered hover>
@@ -314,7 +277,7 @@ const Products = () => {
               </tr>
             </thead>
             <tbody>
-              {filterData?.map((i, index) => (
+              {data?.data?.map((i, index) => (
                 <tr key={index}>
                   <td> #{index + 1} </td>
                   <td
@@ -326,13 +289,16 @@ const Products = () => {
                     {" "}
                     {i.lotId}{" "}
                   </td>
+
                   <td> {i.user_id?.tradeName} </td>
+
                   <td> {i.crop?.name} </td>
                   <td> {i.status} </td>
-                  <td> {i.expiretime} </td>
+                  <td> {i.expiretime?.slice(0, 10)} </td>
                   <td> {i.expectedRate} </td>
                   <td> {i.topBid} </td>
                   <td> {i.count} </td>
+
                   <td>
                     <Button
                       onClick={() => {
@@ -358,7 +324,6 @@ const Products = () => {
             </tbody>
           </Table>
         </div>
-        </>
       )}
     </>
   );

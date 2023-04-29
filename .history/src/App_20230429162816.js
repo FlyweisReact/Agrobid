@@ -37,7 +37,6 @@ import CropById from "./components/pages/CropById";
 import Transaction from "./components/pages/Transaction";
 import KrishiSalah from "./components/pages/KrishiSalah";
 import BuyerTransaction from "./components/pages/BuyerTransaction";
-import Tax from "./components/pages/Tax";
 
 
 
@@ -80,7 +79,6 @@ function App() {
         <Route path="/transaction/:id" element={<Transaction />} />
         <Route path="/buyerTrans/:id" element={<BuyerTransaction />} />
         <Route path="/krishiSalah" element={<KrishiSalah />} />
-        <Route path="/tax" element={<Tax />} />
       </Routes>
     </>
   );

@@ -67,14 +67,8 @@ const Products = () => {
         console.log(e);
       }
     };
-
-    const handleChange = (e) => {
-      const inputDate = new Date(e.target.value);
-      const localDate = new Date(inputDate.getTime() - inputDate.getTimezoneOffset() * 60000)
-        .toISOString()
-        setExpireTime(localDate)
-    }
-
+    console.log(expiretime)
+    // console.log(new Date(expiretime.getTime() - expiretime.getTimezoneOffset() * 60000))
 
     return (
       <Modal
@@ -94,7 +88,7 @@ const Products = () => {
               <Form.Label>Expiry Time</Form.Label>
               <Form.Control
                 type="datetime-local"
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => setExpireTime(e.target.value)}
               />
             </Form.Group>
             <Button variant="outline-success" type="submit">
@@ -285,7 +279,7 @@ const Products = () => {
               color: "black",
               padding: "5px",
             }}
-            placeholder="Search by Name , Crop ..."
+            placeholder="Search by Name , Phone number.."
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>
@@ -329,7 +323,7 @@ const Products = () => {
                   <td> {i.user_id?.tradeName} </td>
                   <td> {i.crop?.name} </td>
                   <td> {i.status} </td>
-                  <td> {i.expiretime} </td>
+                  <td> {i.expiretime?.slice(0, 10)} </td>
                   <td> {i.expectedRate} </td>
                   <td> {i.topBid} </td>
                   <td> {i.count} </td>

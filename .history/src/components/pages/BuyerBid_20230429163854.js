@@ -12,9 +12,10 @@ const BuyerBid = () => {
   const { id } = useParams();
   const [secondTab, setSecondTab] = useState(false);
   const [lotIdData, setLotIdData] = useState([]);
-  const [modalShow, setModalShow] = useState(false);
-  const [bidId, setBidId] = useState("");
-  const [query, setQuery] = useState("");
+  const [ modalShow , setModalShow ] = useState(false)
+  const [ bidId , setBidId ] = useState("")
+  const [ query , setQuery  ] = useState(""
+  )
   const fetchData = useCallback(async () => {
     try {
       const { data } = await axios.get(
@@ -48,25 +49,22 @@ const BuyerBid = () => {
   };
 
   function MyVerticallyCenteredModal(props) {
-    const [quantity, setQuantity] = useState("");
+    const [ quantity , setQuantity] = useState("")
 
     const editHandler = async (e) => {
-      e.preventDefault();
+      e.preventDefault()
       try {
-        const { data } = await axios.put(
-          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/placebid/update/${bidId}`,
-          {
-            quantity,
-          }
-        );
-        console.log(data);
-        alert("Edited");
-        setModalShow(false);
-        fetchData();
-      } catch (e) {
-        console.log(e);
+        const { data } = await axios.put(`https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/placebid/update/${bidId}` , {
+          quantity
+        })
+        console.log(data)
+        alert('Edited')
+        setModalShow(false)
+        fetchData()
+      }catch(e) { 
+        console.log(e)
       }
-    };
+    }
 
     return (
       <Modal
@@ -82,14 +80,10 @@ const BuyerBid = () => {
           <Form onSubmit={editHandler}>
             <Form.Group className="mb-3">
               <Form.Label>Quantity</Form.Label>
-              <Form.Control
-                type="number"
-                min={0}
-                onChange={(e) => setQuantity(e.target.value)}
-              />
+              <Form.Control type="number" min={0} onChange={(e) => setQuantity(e.target.value)} />
             </Form.Group>
 
-            <Button type="submit">Submit</Button>
+            <Button type='submit'>Submit</Button>
           </Form>
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
@@ -97,6 +91,7 @@ const BuyerBid = () => {
     );
   }
 
+  
   const filterData = !query
     ? data
     : data?.filter(
@@ -108,12 +103,10 @@ const BuyerBid = () => {
             .includes(query?.toLowerCase())
       );
 
+
   return (
     <>
-      <MyVerticallyCenteredModal
-        show={modalShow}
-        onHide={() => setModalShow(true)}
-      />
+    <MyVerticallyCenteredModal show={modalShow} onHide={() => setModalShow(true)} />
       <section>
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">
           <span className="tracking-widest text-slate-900 font-semibold uppercase ">
@@ -160,92 +153,74 @@ const BuyerBid = () => {
                   <td> {lotIdData?.result?.[0]?.crop?.moisture} </td>
                   <td> {lotIdData?.result?.[0]?.crop?.extraneous} </td>
                   <td> {lotIdData?.result?.[0]?.crop?.foreign} </td>
+               
                 </tr>
               </tbody>
             </Table>
           </div>
         </>
       ) : (
-        <>
-          <div style={{ marginTop: "2%" }}>
-            <div style={{ color: "black" }}>
-              Search:{" "}
-              <input
-                type={"search"}
-                style={{
-                  border: "1px solid #bfbfbf",
-                  width: "250px",
-                  color: "black",
-                  padding: "5px",
-                }}
-                placeholder="Search by Name , Phone number.."
-                onChange={(e) => setQuery(e.target.value)}
-              />
-            </div>
-          </div>
-
-          <div
-            style={{
-              width: "100%",
-              overflowX: "scroll",
-              marginTop: "2%",
-            }}
-          >
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th> SNo. </th>
-                  <th> Lot Id </th>
-                  <th> Supp Name </th>
-                  <th> Crop </th>
-                  <th> Quantity </th>
-                  <th> Status </th>
-                  <th>Expiry Time </th>
-                  <th> Your Bid </th>
-                  <th>Highest Bid </th>
-                  <th>Total Bid </th>
-                  <th>Inspection Requested </th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filterData?.map((i, index) => (
-                  <tr key={index}>
-                    <td> #{index + 1} </td>
-                    <td
+     <>
+     <div
+          style={{
+            width: "100%",
+            overflowX: "scroll",
+          }}
+        >
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th> SNo. </th>
+                <th> Lot Id </th>
+                <th> Supp Name </th>
+                <th> Crop </th>
+                <th> Quantity </th>
+                <th> Status </th>
+                <th>Expiry Time </th>
+                <th> Your Bid </th>
+                <th>Highest Bid </th>
+                <th>Total Bid </th>
+                <th>Inspection Requested </th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data?.map((i, index) => (
+                <tr key={index}>
+                  <td> #{index + 1} </td>
+                  <td
+                    style={{ color: "blue", cursor: "pointer" }}
+                    onClick={() => {
+                      fetchSingleBid(i.bidDetail?.lotId);
+                    }}
+                  >
+                    {" "}
+                    {i.bidDetail?.lotId}{" "}
+                  </td>
+                  <td> {i.bidDetail?.supplierData?.tradeName} </td>
+                  <td> {i.crop?.name} </td>
+                  <td> {i.quantity} </td>
+                  <td> {i.status} </td>
+                  <td> {i.bidDetail?.expiretime?.slice(0, 10)} </td>
+                  <td> {i.highestBid} </td>
+                  <td> {i.bidDetail?.topBid} </td>
+                  <td> {i.bidDetail?.count} </td>
+                  <td> {i.inspection === false ? "False" : "True"} </td>
+                  <td>
+                    <i
+                      className="fa-solid fa-edit"
                       style={{ color: "blue", cursor: "pointer" }}
-                      onClick={() => {
-                        fetchSingleBid(i.bidDetail?.lotId);
-                      }}
-                    >
-                      {" "}
-                      {i.bidDetail?.lotId}{" "}
-                    </td>
-                    <td> {i.bidDetail?.supplierData?.tradeName} </td>
-                    <td> {i.crop?.name} </td>
-                    <td> {i.quantity} </td>
-                    <td> {i.status} </td>
-                    <td> {i.bidDetail?.expiretime?.slice(0, 10)} </td>
-                    <td> {i.highestBid} </td>
-                    <td> {i.bidDetail?.topBid} </td>
-                    <td> {i.bidDetail?.count} </td>
-                    <td> {i.inspection === false ? "False" : "True"} </td>
-                    <td>
-                      <i
-                        className="fa-solid fa-edit"
-                        style={{ color: "blue", cursor: "pointer" }}
-                        onClick={() => {
-                          setBidId(i._id);
-                          setModalShow(true);
-                        }}
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </div>
-        </>
+                      onClick={() =>{
+                        setBidId(i._id)
+                         setModalShow(true)}}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+     </>
       )}
     </>
   );
