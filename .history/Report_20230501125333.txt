@@ -7,6 +7,6 @@
 
 
 3-Master crop as discussed 
-
-
+4-Transporter lead status is static it should be editable 
 5-All loading data column has Vehicle number missing (And otp auto feed)-Manish knows that
+6-News feed should perfectly fit into the app.

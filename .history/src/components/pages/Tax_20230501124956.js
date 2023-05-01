@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import HOC from "../layout/HOC";
 import Table from "react-bootstrap/Table";
 import { Modal, Form, Button } from "react-bootstrap";
-import { AiFillDelete  } from "react-icons/ai";
+import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import axios from "axios";
 const Tax = () => {
   const [modalShow, setModalShow] = React.useState(false);
@@ -80,17 +80,6 @@ const Tax = () => {
         </Modal.Body>
       </Modal>
     );
-  }
-
-  const deleteHandler = async(id) => {
-    try{
-      const { data } = await axios.delete(`https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/tax/${id}`)
-      console.log(data)
-      fetchData()
-      alert("Deleted")
-    }catch(e) { 
-      console.log(e)
-    }
   }
 
   return (

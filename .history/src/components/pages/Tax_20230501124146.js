@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import HOC from "../layout/HOC";
 import Table from "react-bootstrap/Table";
 import { Modal, Form, Button } from "react-bootstrap";
-import { AiFillDelete  } from "react-icons/ai";
+import { AiFillEdit } from "react-icons/ai";
 import axios from "axios";
 const Tax = () => {
   const [modalShow, setModalShow] = React.useState(false);
@@ -29,25 +29,11 @@ const Tax = () => {
 
   function MyVerticallyCenteredModal(props) {
 
-    const [ tax , setTax ] = useState("")
-    const [ others_charges , setOthersCharges ] = useState("")
-    const [ others ,setOthers  ] = useState("")
+    const [ ] = useState("")
+    const [ ] = useState("")
+    const [ ] = useState("")
 
-    const postHandler = async (e) => {
-      e.preventDefault()
-      try{  
-        const { data } = await axios.post("https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/tax" , {
-          tax  , others , others_charges
-        })
-        console.log(data)
-        fetchData()
-        props.onHide()
-      }catch(e) {
-        console.log(e)
-      }
-    }
-
-
+    const postHabn
 
     return (
       <Modal
@@ -57,21 +43,21 @@ const Tax = () => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">Add</Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter">Edit</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={postHandler}>
+          <Form>
             <Form.Group className="mb-3">
               <Form.Label>Tax</Form.Label>
-              <Form.Control type="number" min={0} onChange={(e) => setTax(e.target.value)} />
+              <Form.Control type="number" min={0} />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Commission</Form.Label>
-              <Form.Control type="number" min={0} onChange={(e) => setOthersCharges(e.target.value)} />
+              <Form.Control type="number" min={0} />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Other Expenses</Form.Label>
-              <Form.Control type="number" min={0} onChange={(e) => setOthers(e.target.value)} />
+              <Form.Control type="number" min={0} />
             </Form.Group>
             <Button variant="outline-success" type="submit">
               Submit
@@ -80,17 +66,6 @@ const Tax = () => {
         </Modal.Body>
       </Modal>
     );
-  }
-
-  const deleteHandler = async(id) => {
-    try{
-      const { data } = await axios.delete(`https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/tax/${id}`)
-      console.log(data)
-      fetchData()
-      alert("Deleted")
-    }catch(e) { 
-      console.log(e)
-    }
   }
 
   return (
@@ -104,7 +79,6 @@ const Tax = () => {
           <span className="tracking-widest text-slate-900 font-semibold uppercase ">
             Tax
           </span>
-          <Button  onClick={() => setModalShow(true)} >Add Tax</Button>
         </div>
       </section>
 
@@ -124,9 +98,9 @@ const Tax = () => {
               <td> {i.others_charges}%</td>
               <td>{i.others}% </td>
               <td>
-                <AiFillDelete
-                  color="red"
-                  onClick={() => deleteHandler(i._id)}
+                <AiFillEdit
+                  color="blue"
+                  onClick={() => setModalShow(true)}
                   cursor="pointer"
                 />
               </td>
