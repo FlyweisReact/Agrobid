@@ -66,7 +66,7 @@ const Dashboard = () => {
     {
       progress: "bg-green-400",
       title: "Total Buyers",
-      number: countBuyer ? countBuyer : 0,
+      number: countBuyer,
       icon: <FaUserAlt className="text-2xl text-[#4099ff]" />,
       bg: "#4099ff",
     },
@@ -108,7 +108,6 @@ const Dashboard = () => {
             <div
               className="px-5 py-8 bg-slate-200 space-y-2 shadow-xl flex flex-col  rounded-md"
               style={{ backgroundColor: `${card.bg}` }}
-              key={index}
             >
               <div className="grid  justify-between grid-cols-4">
                 <div className="flex flex-col col-span-3 space-y-1">

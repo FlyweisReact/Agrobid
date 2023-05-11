@@ -57,19 +57,12 @@ const Buyer = () => {
       <section>
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">
           <span className="tracking-widest text-slate-900 font-semibold uppercase ">
-            All Buyer's (Total : {dataCount ? dataCount : 0})
+            All Buyer's (Total : {dataCount})
           </span>
         </div>
       </section>
 
- 
-
-      {filterData === "No Data" ? (
-        <Alert>No Buyer Found</Alert>
-      ) : (
-       <>
-
-       <div style={{ marginBottom : '20px' }}>
+      <div style={{ marginBottom : '20px' }}>
         <div style={{ color: "black" }}>
           Search:{" "}
           <input
@@ -86,65 +79,10 @@ const Buyer = () => {
         </div>
       </div>
 
-       <div
-          style={{
-            width: "100%",
-            overflowX: "scroll",
-          }}
-        >
-          <Table
-            striped
-            bordered
-            hover
-            style={{
-              marginTop: "2%",
-            }}
-          >
-            <thead>
-              <tr>
-                <th>SNo.</th>
-                <th>Image</th>
-                <th> Name </th>
-                <th>trade Name</th>
-                <th>Email</th>
-                <th>Contact</th>
-                <th>Location</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filterData?.map((i, index) => (
-                <tr key={index}>
-                  <td> #{index + 1} </td>
-                  <td>
-                    <img src={i.photo} alt="" className="fast-food" />
-                  </td>
-                  <td>
-                    <Link to={`/customer/${i._id}`}>{i.tradeName}</Link>
-                  </td>
-                  <td> {i.tradeName} </td>
-                  <td> {i.email} </td>
-                  <td> {i.phoneNumber} </td>
-                  <td>
-                    {" "}
-                    {i.address?.[0]?.homeaddress + i.address?.[0]?.city}{" "}
-                  </td>
-                  <td>
-                    <div className="d-flex gap-2">
-                      <i
-                        className="fa-solid fa-trash"
-                        style={{ color: "red", cursor: "pointer" }}
-                        onClick={() => deleteHandler(i._id)}
-                      ></i>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
-
-       </>
+      {filterData === "No Data" ? (
+        <Alert>No Buyer Found</Alert>
+      ) : (
+       <></>
       )}
     </>
   );

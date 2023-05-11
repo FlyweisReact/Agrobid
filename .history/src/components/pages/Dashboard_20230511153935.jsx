@@ -66,7 +66,7 @@ const Dashboard = () => {
     {
       progress: "bg-green-400",
       title: "Total Buyers",
-      number: countBuyer ? countBuyer : 0,
+      number: countBuyer ? count,
       icon: <FaUserAlt className="text-2xl text-[#4099ff]" />,
       bg: "#4099ff",
     },

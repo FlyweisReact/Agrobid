@@ -57,7 +57,7 @@ const Buyer = () => {
       <section>
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">
           <span className="tracking-widest text-slate-900 font-semibold uppercase ">
-            All Buyer's (Total : {dataCount ? dataCount : 0})
+            All Buyer's (Total : {dataCount})
           </span>
         </div>
       </section>
@@ -68,24 +68,6 @@ const Buyer = () => {
         <Alert>No Buyer Found</Alert>
       ) : (
        <>
-
-       <div style={{ marginBottom : '20px' }}>
-        <div style={{ color: "black" }}>
-          Search:{" "}
-          <input
-            type={"search"}
-            style={{
-              border: "1px solid #bfbfbf",
-              width: "250px",
-              color: "black",
-              padding: "5px",
-            }}
-            placeholder="Search by Name , Phone number.."
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </div>
-      </div>
-
        <div
           style={{
             width: "100%",

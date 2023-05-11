@@ -57,19 +57,12 @@ const Buyer = () => {
       <section>
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">
           <span className="tracking-widest text-slate-900 font-semibold uppercase ">
-            All Buyer's (Total : {dataCount ? dataCount : 0})
+            All Buyer's (Total : {dataCount})
           </span>
         </div>
       </section>
 
- 
-
-      {filterData === "No Data" ? (
-        <Alert>No Buyer Found</Alert>
-      ) : (
-       <>
-
-       <div style={{ marginBottom : '20px' }}>
+      <div style={{  }}>
         <div style={{ color: "black" }}>
           Search:{" "}
           <input
@@ -86,7 +79,10 @@ const Buyer = () => {
         </div>
       </div>
 
-       <div
+      {filterData === "No Data" ? (
+        <Alert>No Buyer Found</Alert>
+      ) : (
+        <div
           style={{
             width: "100%",
             overflowX: "scroll",
@@ -143,8 +139,6 @@ const Buyer = () => {
             </tbody>
           </Table>
         </div>
-
-       </>
       )}
     </>
   );
