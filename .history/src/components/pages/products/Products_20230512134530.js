@@ -108,7 +108,7 @@ const Products = () => {
       try {
         const { data } = await axios.post(
           `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/createbid/waitlist/bid/${id}` , {
-            user : role
+            user : id
           }
         );
         setEach(data);
@@ -412,7 +412,7 @@ const Products = () => {
                     <td>
                       <Button
                         onClick={() => {
-                          setId(i._id);
+                          setId(i.user_id?._id);
                           setShow(true);
                         }}
                       >

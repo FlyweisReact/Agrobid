@@ -30,7 +30,8 @@ const Cat = () => {
 
   function MyVerticallyCenteredModal(props) {
     const [img, setImg] = useState("");
-  
+    const [ ] = useState(false)
+
     const postthumbImage = (url) => {
       const data = new FormData();
       data.append("file", url);

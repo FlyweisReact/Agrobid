@@ -1,39 +1,36 @@
 /** @format */
 
 import React, { useState, useEffect, useCallback } from "react";
-import { Button, Modal, Form, Alert } from "react-bootstrap";
-import HOC from "../../layout/HOC";
+import HOC from "../layout/HOC";
 import Table from "react-bootstrap/Table";
-import { useParams } from "react-router-dom";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
+import { Alert, Button, Form, Modal } from "react-bootstrap";
 
-const Products = () => {
-  const { role } = useParams();
-  const [modalShow, setModalShow] = React.useState(false);
-  const [id, setId] = useState("");
-  const [data, setData] = useState("");
+const BuyerBid = () => {
+  const [data, setData] = useState([]);
+  const { id } = useParams();
   const [secondTab, setSecondTab] = useState(false);
-  const [show, setShow] = useState(false);
   const [lotIdData, setLotIdData] = useState([]);
-  const [query, setQuery] = useState("");
+  const [modalShow, setModalShow] = useState(false);
   const [modalShow2, setModalShow2] = useState(false);
+  const [bidId, setBidId] = useState("");
+  const [query, setQuery] = useState("");
 
-  const fetchHandler = useCallback(async () => {
+  const fetchData = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/createbid/${role}`
+        `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/placebid/getbuyer/${id}`
       );
-      setData(data);
-      console.log(data)
-    } catch (e) {
-      console.log(e);
+      setData(data.details);
+    } catch (E) {
+      console.log(E);
     }
-  }, [role]);
+  }, [id]);
 
   useEffect(() => {
-    fetchHandler();
-  }, [fetchHandler]);
+    fetchData();
+  }, [fetchData]);
 
   const fetchSingleBid = async (lotId) => {
     try {
@@ -44,6 +41,7 @@ const Products = () => {
         }
       );
       setLotIdData(data);
+      console.log(data);
       setSecondTab(true);
     } catch (e) {
       console.log(e);
@@ -51,19 +49,21 @@ const Products = () => {
   };
 
   function MyVerticallyCenteredModal(props) {
-    const [expiretime, setExpireTime] = useState("");
+    const [quantity, setQuantity] = useState("");
 
-    const putHandler = async (e) => {
+    const editHandler = async (e) => {
       e.preventDefault();
       try {
         const { data } = await axios.put(
-          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/createbid/verifyByAdmin/${id}`,
-          { expiretime }
+          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/placebid/update/${bidId}`,
+          {
+            quantity,
+          }
         );
         console.log(data);
-        toast.success("Success");
-        props.onHide();
-        fetchHandler();
+        alert("Edited");
+        setModalShow(false);
+        fetchData();
       } catch (e) {
         console.log(e);
       }
@@ -72,27 +72,25 @@ const Products = () => {
     return (
       <Modal
         {...props}
-        size="lg-down"
+        size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Edit Status
-          </Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter">Edit</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={putHandler}>
+          <Form onSubmit={editHandler}>
             <Form.Group className="mb-3">
-              <Form.Label>Expiry Time</Form.Label>
+              <Form.Label>Quantity</Form.Label>
               <Form.Control
-                type="datetime-local"
-                onChange={(e) => setExpireTime(e.target.value)}
+                type="number"
+                min={0}
+                onChange={(e) => setQuantity(e.target.value)}
               />
             </Form.Group>
-            <Button variant="outline-success" type="submit">
-              Submit
-            </Button>
+
+            <Button type="submit">Submit</Button>
           </Form>
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
@@ -100,117 +98,14 @@ const Products = () => {
     );
   }
 
-  // Top 10 Bidder
-  function BidModal(props) {
-    const [each, setEach] = useState([]);
-
-    const fetchBidder = useCallback(async () => {
-      try {
-        const { data } = await axios.post(
-          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/createbid/waitlist/bid/${id}` , {
-            user : role
-          }
-        );
-        setEach(data);
-      } catch (e) {
-        console.log(e);
-      }
-    }, []);
-
-    useEffect(() => {
-      if (props.show === true) {
-        fetchBidder();
-      }
-    }, [fetchBidder, props.show]);
-
-    const postHandler = async (status) => {
-      try {
-        const { data } = await axios.post(
-          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/createbid/payment/status/${id}`,
-          {
-            status,
-          }
-        );
-        console.log(data);
-        fetchBidder();
-      } catch (e) {
-        console.log(e);
-      }
-    };
-
-    return (
-      <Modal
-        {...props}
-        size="lg-down"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Top 10 Bidder
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>SNo.</th>
-                <th>Name</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {each?.message?.[0]?.top?.map((i, index) => (
-                <tr key={index}>
-                  <td> #{index + 1} </td>
-                  <td> {i.user?.tradeName} </td>
-                  <td> {i.status} </td>
-                  <td>
-                    <span className="d-flex gap-2">
-                      <i
-                        className="fa-solid fa-circle-xmark"
-                        style={{ color: "red", cursor: "pointer" }}
-                        onClick={() => {
-                          postHandler("decline");
-                        }}
-                      ></i>
-                      <i
-                        className="fa-solid fa-circle-check"
-                        style={{ color: "green", cursor: "pointer" }}
-                        onClick={() => {
-                          postHandler("accept");
-                        }}
-                      ></i>
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Modal.Body>
-        <Modal.Footer></Modal.Footer>
-      </Modal>
-    );
-  }
-
-  const filterData = !query
-    ? data?.data
-    : data?.data?.filter(
-        (i) =>
-          i?.user_id?.tradeName?.toLowerCase().includes(query?.toLowerCase()) ||
-          i?.crop?.name?.toLowerCase().includes(query?.toLowerCase()) ||
-          i?.lotId?.toString()?.toLowerCase().includes(query?.toLowerCase())
-      );
-
   function MyVerticallyCenteredModal3(props) {
     const [transData, setTransData] = useState([]);
-    const [ transLenght , setTransLength ] = useState("")
+    const [transLenght, setTransLength] = useState("");
 
     const fetchTransacation = async () => {
       try {
         const { data } = await axios.get(
-          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/createbid/payment/bidId/${id}`
+          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/createbid/payment/placeBid/${bidId}`
         );
         setTransData(data);
         setTransLength(data.result.length);
@@ -251,8 +146,7 @@ const Products = () => {
                     <td>Supplier Name</td>
                     <td>Supplier Phone Number</td>
                     <td>Amount Paid</td>
-                    <td>Pending Amount</td>
-                    <td>Total Amount</td>
+                    <td>Pending Amount </td>
                     <td>Payment Mode</td>
                     <td>Status</td>
                   </tr>
@@ -267,7 +161,7 @@ const Products = () => {
                       <td> {i.supplierId?.phoneNumber} </td>
                       <td> {i.amount} </td>
                       <td> {i.pending} </td>
-                      <td> {i.pending + i.amount} </td>
+                      <td> {i.pending +i.amount } </td>
                       <td> {i.mode} </td>
                       <td> {i.status} </td>
                     </tr>
@@ -282,14 +176,23 @@ const Products = () => {
     );
   }
 
+  const filterData = !query
+    ? data
+    : data?.filter(
+        (i) =>
+          i?.crop?.name?.toLowerCase().includes(query?.toLowerCase()) ||
+          i?.bidDetail?.lotId
+            ?.toString()
+            ?.toLowerCase()
+            .includes(query?.toLowerCase())
+      );
+
   return (
     <>
       <MyVerticallyCenteredModal
         show={modalShow}
         onHide={() => setModalShow(false)}
       />
-      <BidModal show={show} onHide={() => setShow(false)} />
-
       <MyVerticallyCenteredModal3
         show={modalShow2}
         onHide={() => setModalShow2(false)}
@@ -298,7 +201,7 @@ const Products = () => {
       <section>
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">
           <span className="tracking-widest text-slate-900 font-semibold uppercase ">
-            {data?.data?.[0]?.supplierData?.tradeName} Bids
+            Buyer Bid
           </span>
         </div>
       </section>
@@ -314,29 +217,28 @@ const Products = () => {
           </Button>
           <div
             style={{
-              overflow: "auto",
+              width: "100%",
+              overflowX: "scroll",
             }}
           >
             <Table striped bordered hover>
               <thead>
                 <tr>
-                  <th>Lot Id</th>
-                  <th>Product Name</th>
-                  <th>Variety</th>
-                  <th>Grade</th>
-                  <th>Quantity</th>
-                  <th>Total Bags</th>
+                  <th> Lot Id </th>
+                  <th> Variety </th>
+                  <th> Grade </th>
+                  <th> Quantity </th>
+                  <th> Total Bags </th>
                   <th> Moisture </th>
                   <th> Ad Mixture </th>
-                  <th>Foreign Matter </th>
+                  <th> Foreign Matter </th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td> {lotIdData?.result?.[0]?.lotId} </td>
-                  <td> {lotIdData?.result?.[0]?.crop?.name} </td>
-                  <td> {lotIdData?.result?.[0]?.variety} </td>
-                  <td> {lotIdData?.result?.[0]?.grade} </td>
+                  <td> {lotIdData?.result?.[0]?.crop?.variaty} </td>
+                  <td> {lotIdData?.result?.[0]?.crop?.grade} </td>
                   <td> {lotIdData?.result?.[0]?.quantity} </td>
                   <td> {lotIdData?.result?.[0]?.totalBags} </td>
                   <td> {lotIdData?.result?.[0]?.crop?.moisture} </td>
@@ -360,7 +262,7 @@ const Products = () => {
                   color: "black",
                   padding: "5px",
                 }}
-                placeholder="Search by Name , Crop ..."
+                placeholder="Search by Name , Phone number.."
                 onChange={(e) => setQuery(e.target.value)}
               />
             </div>
@@ -368,23 +270,25 @@ const Products = () => {
 
           <div
             style={{
-              overflow: "auto",
+              width: "100%",
+              overflowX: "scroll",
               marginTop: "2%",
             }}
           >
             <Table striped bordered hover>
               <thead>
                 <tr>
-                  <th>SNo.</th>
-                  <th>Lot Id</th>
-                  <th>Supp Name</th>
-                  <th>Crop</th>
-                  <th>Status</th>
-                  <th>Expiry Time Edit</th>
-                  <th>Expected Bid</th>
-                  <th>Highest Bid</th>
-                  <th>Total Bid</th>
-                  <th>Top 10 Bidder/ Remaining Bidder</th>
+                  <th> SNo. </th>
+                  <th> Lot Id </th>
+                  <th> Supp Name </th>
+                  <th> Crop </th>
+                  <th> Quantity </th>
+                  <th> Status </th>
+                  <th>Expiry Time </th>
+                  <th> Your Bid </th>
+                  <th>Highest Bid </th>
+                  <th>Total Bid </th>
+                  <th>Inspection Requested </th>
                   <th>Transaction</th>
                   <th>Action</th>
                 </tr>
@@ -394,35 +298,27 @@ const Products = () => {
                   <tr key={index}>
                     <td> #{index + 1} </td>
                     <td
-                      onClick={() => {
-                        fetchSingleBid(i.lotId);
-                      }}
                       style={{ color: "blue", cursor: "pointer" }}
+                      onClick={() => {
+                        fetchSingleBid(i.bidDetail?.lotId);
+                      }}
                     >
                       {" "}
-                      {i.lotId}{" "}
+                      {i.bidDetail?.lotId}{" "}
                     </td>
-                    <td> {i.user_id?.tradeName} </td>
+                    <td> {i.bidDetail?.supplierData?.tradeName} </td>
                     <td> {i.crop?.name} </td>
+                    <td> {i.quantity} </td>
                     <td> {i.status} </td>
-                    <td> {i.expiretime} </td>
-                    <td> {i.expectedRate} </td>
-                    <td> {i.topBid} </td>
-                    <td> {i.count} </td>
+                    <td> {i.bidDetail?.expiretime?.slice(0, 10)} </td>
+                    <td> {i.highestBid} </td>
+                    <td> {i.bidDetail?.topBid} </td>
+                    <td> {i.bidDetail?.count} </td>
+                    <td> {i.inspection === false ? "False" : "True"} </td>
                     <td>
                       <Button
                         onClick={() => {
-                          setId(i._id);
-                          setShow(true);
-                        }}
-                      >
-                        View
-                      </Button>
-                    </td>
-                    <td>
-                      <Button
-                        onClick={() => {
-                          setId(i._id);
+                          setBidId(i._id);
                           setModalShow2(true);
                         }}
                       >
@@ -431,13 +327,13 @@ const Products = () => {
                     </td>
                     <td>
                       <i
-                        className="fa-solid fa-pen-to-square"
+                        className="fa-solid fa-edit"
                         style={{ color: "blue", cursor: "pointer" }}
                         onClick={() => {
-                          setId(i._id);
+                          setBidId(i._id);
                           setModalShow(true);
                         }}
-                      ></i>
+                      />
                     </td>
                   </tr>
                 ))}
@@ -450,4 +346,4 @@ const Products = () => {
   );
 };
 
-export default HOC(Products);
+export default HOC(BuyerBid);

@@ -107,8 +107,8 @@ const Products = () => {
     const fetchBidder = useCallback(async () => {
       try {
         const { data } = await axios.post(
-          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/createbid/waitlist/bid/${id}` , {
-            user : role
+          `https://djqtflksic.execute-api.ap-south-1.amazonaws.com/dev/createbid/waitlist/bid/"645dedb700b08278c77399e6"` , {
+            user : id
           }
         );
         setEach(data);
@@ -412,7 +412,7 @@ const Products = () => {
                     <td>
                       <Button
                         onClick={() => {
-                          setId(i._id);
+                          setId(i.user_id?._id);
                           setShow(true);
                         }}
                       >

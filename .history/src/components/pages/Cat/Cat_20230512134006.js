@@ -34,7 +34,8 @@ const Cat = () => {
     const postthumbImage = (url) => {
       const data = new FormData();
       data.append("file", url);
-      data.append("upload_preset", "ml_default");
+      data.append("upload_preset", "ml_default");npm start
+      
       data.append("cloud_name", "dbcnha741");
       fetch("https://api.cloudinary.com/v1_1/dbcnha741/image/upload", {
         method: "post",
