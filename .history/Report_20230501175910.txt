@@ -1,4 +1,0 @@
-
-1c-Amount paid & amount due in respect to buyer & seller yet not reflecting anywhere in Bid
-3-Master crop as discussed 
-5-All loading data column has Vehicle number missing (And otp auto feed)-Manish knows that
