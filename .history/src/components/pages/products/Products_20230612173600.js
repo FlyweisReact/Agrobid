@@ -102,7 +102,6 @@ const Products = () => {
   // Top 10 Bidder
   function BidModal(props) {
     const [each, setEach] = useState([]);
-    const [ userId , setUserId ] = useState("")
 
     const fetchBidder = useCallback(async () => {
       try {
@@ -113,7 +112,7 @@ const Products = () => {
           }
         );
         setEach(data);
-        setUserId(data.message[0].user._id)
+        console.log(data.message[0])
       } catch (e) {
         console.log(e);
       }
@@ -125,14 +124,13 @@ const Products = () => {
       }
     }, [fetchBidder, props.show]);
 
-
-
-
-    const acceptBid = async (bidId) => {
+    const postHandler = async (status) => {
       try {
         const { data } = await axios.post(
-          `https://ajeet-backend-new.vercel.app/api/v1/createbid/accept/${bidId}/${userId}/${id}`,
-      
+          `https://ajeet-backend-new.vercel.app/api/v1/createbid/payment/status/${id}`,
+          {
+            status,
+          }
         );
         console.log(data);
         fetchBidder();
@@ -141,10 +139,11 @@ const Products = () => {
       }
     };
 
-    const cancelBid = async (bidId) => {
+
+    const acceptBid = async (bidId) => {
       try {
         const { data } = await axios.post(
-          `https://ajeet-backend-new.vercel.app/api/v1/createbid/cancel/${bidId}/${userId}/${id}`,
+          `https://ajeet-backend-new.vercel.app/api/v1/createbid/accept/${bidId}/${id}/${bidId}`,
       
         );
         console.log(data);
@@ -188,14 +187,14 @@ const Products = () => {
                         className="fa-solid fa-circle-xmark"
                         style={{ color: "red", cursor: "pointer" }}
                         onClick={() => {
-                          cancelBid(i._id);
+                          postHandler("decline");
                         }}
                       ></i>
                       <i
                         className="fa-solid fa-circle-check"
                         style={{ color: "green", cursor: "pointer" }}
                         onClick={() => {
-                          acceptBid(i._id);
+                          acceptBid();
                         }}
                       ></i>
                     </span>

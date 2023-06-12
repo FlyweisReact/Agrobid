@@ -125,7 +125,20 @@ const Products = () => {
       }
     }, [fetchBidder, props.show]);
 
-
+    const postHandler = async (status) => {
+      try {
+        const { data } = await axios.post(
+          `https://ajeet-backend-new.vercel.app/api/v1/createbid/payment/status/${id}`,
+          {
+            status,
+          }
+        );
+        console.log(data);
+        fetchBidder();
+      } catch (e) {
+        console.log(e);
+      }
+    };
 
 
     const acceptBid = async (bidId) => {
