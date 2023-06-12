@@ -71,7 +71,7 @@ const LoadingData = () => {
     const fetchCrop = async () => {
       try {
         const { data } = await axios.get("https://ajeet-backend-new.vercel.app/api/v1/items")
-        setCrop(data.result)
+        setCrop(data)
       }catch(e) { 
         console.log(e)
       }
@@ -170,7 +170,7 @@ const LoadingData = () => {
                 >
                   <option>-- Select Crop --</option>
                   {crops?.map((user, index) => (
-                    <option key={index} value={user.name}>
+                    <option key={index} value={user._id}>
                       {" "}
                       {user.name}{" "}
                     </option>
@@ -191,6 +191,13 @@ const LoadingData = () => {
                   ))}
                 </Form.Select>
               </Form.Group>
+              {/* <Form.Group className="mb-3">
+                <Form.Label>Crop</Form.Label>
+                <Form.Control
+                  type="text"
+                  onChange={(e) => setC(e.target.value)}
+                />
+              </Form.Group> */}
               <Form.Group className="mb-3">
                 <Form.Label>Quantity</Form.Label>
                 <Form.Control

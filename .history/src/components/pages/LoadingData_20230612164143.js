@@ -170,7 +170,7 @@ const LoadingData = () => {
                 >
                   <option>-- Select Crop --</option>
                   {crops?.map((user, index) => (
-                    <option key={index} value={user.name}>
+                    <option key={index} value={user._id}>
                       {" "}
                       {user.name}{" "}
                     </option>
